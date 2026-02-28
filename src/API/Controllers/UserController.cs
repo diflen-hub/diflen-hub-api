@@ -10,11 +10,6 @@ namespace API.Controllers
     [ApiController]
     public class UsersController(IUserRepository userRepository, LoginUseCase loginUseCase, RegisterUseCase _useCase) : ControllerBase
     {
-        /// <summary>
-        /// Register
-        /// </summary>
-        /// <param name="user"></param>
-        /// <returns></returns>
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterDtoIn registerDto)
         {
@@ -23,11 +18,6 @@ namespace API.Controllers
 
         }
 
-        /// <summary>
-        /// Login
-        /// </summary>
-        /// <param name="user"></param>
-        /// <returns></returns>
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginDtoIn loginDto)
         {

@@ -11,13 +11,6 @@ namespace API.Controllers
     [Authorize]
     public class QuestionnaireController(VerifyAnswersUseCase verifyAnswersUseCase) : ControllerBase
     {
-        /// <summary>
-        /// Veryfy answers
-        /// </summary>
-        /// <param name="lessonId"></param>
-        /// <param name="unityName"></param>
-        /// <param name="answers"></param>
-        /// <returns></returns>
         [HttpPost("verify-answers")]
         public async Task<IActionResult> VerifyAnswers([FromBody] AnswerVerifyIn answerVerifyIn)
         {

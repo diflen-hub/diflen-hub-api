@@ -10,11 +10,6 @@ namespace API.Controllers
     [Authorize]
     public class LessonController(GetLessonsUseCase getLessonsUseCase, GetLessonUseCase getLessonUseCase) : ControllerBase
     {
-        /// <summary>
-        /// Lesson
-        /// </summary>
-        /// <param name="unityId"></param>
-        /// <returns></returns>
         [HttpGet("get-lessons-by-unity-name")]
         public async Task<IActionResult> GetLessonsFromUnity([FromQuery] string unityName)
         {
