@@ -1,3 +1,4 @@
+using System.Net;
 using Application.Dtos;
 using Domain.Interfaces.Repositories;
 using Domain.Models;
@@ -20,6 +21,7 @@ namespace Application.UseCases
 
             return new()
             {
+                StatusCode = HttpStatusCode.Created,
                 Content = "Usuário criado com sucesso"
             };
         }
