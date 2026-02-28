@@ -14,18 +14,15 @@ namespace Application.UseCases
 
             if (userFromDatabase is null) return new()
             {
-                Content = "Usuário não encontrado",
+                Content = "Usuário ou senha incorreto",
                 StatusCode = HttpStatusCode.Unauthorized
             };
 
-            else if (!BCrypt.Net.BCrypt.Verify(password, userFromDatabase.Password))
+            if (!BCrypt.Net.BCrypt.Verify(password, userFromDatabase.Password)) return new()
             {
-                return new()
-                {
-                    Content = "Senha incorreta",
-                    StatusCode = HttpStatusCode.Unauthorized
-                };
-            }
+                Content = "Usuário ou senha incorreto",
+                StatusCode = HttpStatusCode.Unauthorized
+            };
 
             return new()
             {
