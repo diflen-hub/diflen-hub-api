@@ -8,7 +8,6 @@ using Infra.Repositories;
 using Infra.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using Scalar.AspNetCore;
 
 namespace API
 {
@@ -74,7 +73,6 @@ namespace API
         {
             services.AddControllers();
             services.AddEndpointsApiExplorer();
-            services.AddSwaggerGen();
         }
 
         internal static void ConfigureJwt(IServiceCollection services, ConfigurationManager configuration)
@@ -104,15 +102,6 @@ namespace API
             });
 
             services.AddAuthorization();
-        }
-
-        internal static void ConfigureScalar(WebApplication app)
-        {
-            app.UseSwagger();
-            app.MapScalarApiReference(op =>
-            {
-                op.AddDocument("Doc", routePattern: "/swagger/v1/swagger.json");
-            });
         }
 
         internal static void ConfigureAPI(WebApplication app)
