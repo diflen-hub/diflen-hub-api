@@ -10,13 +10,12 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers
 {
     [Route("api/user")]
-    [Description("Controller com os endpoints relacionados à login, criação de usuário e obtenção livre de usuário para mostrar no perfil")]
     [ApiController]
     public class UsersController(IUserRepository userRepository, LoginUseCase loginUseCase, RegisterUseCase _useCase) : ControllerBase
     {
         [EndpointSummary("Registro")]
         [EndpointDescription("Cria um novo usuário.")]
-        [ProducesResponseType(StatusCodes.Status201Created, Description = "Usuário criado com sucesso.")]
+        [ProducesResponseType(StatusCodes.Status201Created, Description = "Quando o usuário é criado com sucesso.")]
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterDtoIn registerDto)
         {
@@ -26,8 +25,8 @@ namespace API.Controllers
 
         [EndpointSummary("Login")]
         [EndpointDescription("Realiza login na API para obter token JWT.")]
-        [ProducesResponseType<UseCaseResult>(StatusCodes.Status200OK, Description = "Login realizado com sucesso.")]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized, Description = "Quando a senha ou usuário está incorreto")]
+        [ProducesResponseType<UseCaseResult>(StatusCodes.Status200OK, Description = "Quando o login é realizado com sucesso.")]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized, Description = "Quando a senha ou usuário estão incorretos.")]
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginDtoIn loginDto)
         {
@@ -37,8 +36,8 @@ namespace API.Controllers
 
         [EndpointSummary("Obter perfil")]
         [EndpointDescription("Retorna os dados de qualquer usuário solicitado.")]
-        [ProducesResponseType(StatusCodes.Status200OK, Description = "Usuário encontrado.")]
-        [ProducesResponseType(StatusCodes.Status204NoContent, Description = "Usuário não encontrado.")]
+        [ProducesResponseType(StatusCodes.Status200OK, Description = "Quando o usuário é encontrado.")]
+        [ProducesResponseType(StatusCodes.Status204NoContent, Description = "Quando o usuário não encontrado.")]
         [HttpGet("profile")]
         public async Task<IActionResult> Profile([FromQuery][Required][Description("Nome de usuário que deseja buscar.")] string username)
         {
