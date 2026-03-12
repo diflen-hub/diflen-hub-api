@@ -5,12 +5,9 @@
     <Platform Name="x86" />
   </Configurations>
   <Folder Name="/src/">
-    <Project Path="src/API/API.csproj" />
-    <Project Path="src/Application/Application.csproj" />
-    <Project Path="src/Domain/Domain.csproj" />
-    <Project Path="src/Infra/Infra.csproj" />
-  </Folder>
-  <Folder Name="/tests/">
-    <Project Path="tests/Tests.csproj" />
+    <Project Path="src/api/api.csproj" />
+    <Project Path="src/application/application.csproj" />
+    <Project Path="src/domain/domain.csproj" />
+    <Project Path="src/infra/infra.csproj" />
   </Folder>
 </Solution>
