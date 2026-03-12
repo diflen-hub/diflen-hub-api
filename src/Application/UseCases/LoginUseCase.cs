@@ -8,19 +8,27 @@ namespace Application.UseCases
 {
     public class LoginUseCase(IUserRepository userRepository, IJwtService jwtService)
     {
-        public async Task<UseCaseResult> ExecuteAsync(string email, string password)
+        public async Task<UseCaseResult<LoginDtoOut>> ExecuteAsync(string email, string password)
         {
             var userFromDatabase = await userRepository.GetAsync(u => u.Email == email);
 
             if (userFromDatabase is null) return new()
             {
-                Content = "Usuário ou senha incorreto",
+                Content = new()
+                {
+                    IsLogged = false,
+                },
+                Message = "Usuário ou senha incorreto",
                 StatusCode = HttpStatusCode.Unauthorized
             };
 
             if (!BCrypt.Net.BCrypt.Verify(password, userFromDatabase.Password)) return new()
             {
-                Content = "Usuário ou senha incorreto",
+                Content = new()
+                {
+                    IsLogged = false,
+                },
+                Message = "Usuário ou senha incorreto",
                 StatusCode = HttpStatusCode.Unauthorized
             };
 
@@ -31,8 +39,8 @@ namespace Application.UseCases
                     IsLogged = true,
                     AccessToken = jwtService.GenerateBearerToken(userFromDatabase),
                     ExpiresIn = jwtService.GetExpirationDate(),
-                    Message = "Successfully logged."
-                }
+                },
+                Message = "Successfully logged."
             };
         }
     }

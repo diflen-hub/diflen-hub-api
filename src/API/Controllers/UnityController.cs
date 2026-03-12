@@ -1,4 +1,6 @@
+using System.Collections.Immutable;
 using System.Security.Claims;
+using Application.Dtos;
 using Application.UseCases;
 using Domain.Dtos;
 using Domain.Interfaces.Repositories;
@@ -12,20 +14,27 @@ namespace API.Controllers;
 [Authorize]
 public class UnityController(IUnityRepository unityRepository, GetUnityUseCase getUnityUseCase) : ControllerBase
 {
-    [HttpGet("get-all")]
-    public async Task<IActionResult> GetAllUnities()
+    [HttpGet]
+    [EndpointSummary("Obter lista")]
+    [EndpointDescription("Retorna todas as unidades")]
+    public async Task<UseCaseResult<List<UnityDtoOut>>> GetAll()
     {
         var unities = await unityRepository.GetListAsync(u => true);
-        return Ok(unities.Select(unity => new UnityDtoOut
+        return new UseCaseResult<List<UnityDtoOut>>
         {
-            PublicId = unity.PublicId,
-            Name = unity.Name,
-            Description = unity.Description,
-        }));
+            Content = unities.Select(unity => new UnityDtoOut
+            {
+                PublicId = unity.PublicId,
+                Name = unity.Name,
+                Description = unity.Description,
+            }).ToList()
+        };
     }
 
-    [HttpGet("get-from-name")]
-    public async Task<IActionResult> GetUnity([FromQuery] string unityName)
+    [HttpGet("{unityName}")]
+    [EndpointSummary("Obter unidade")]
+    [EndpointDescription("Retorna uma única unidade")]
+    public async Task<ActionResult<UseCaseResult<UnityDtoOut>>> Get(string unityName)
     {
         var publicUserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value!;
         var result = await getUnityUseCase.ExecuteAsync(unityName, Guid.Parse(publicUserId));

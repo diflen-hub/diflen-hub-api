@@ -8,14 +8,10 @@ namespace Application.UseCases
 {
     public class GetLessonsUseCase(IUnityRepository unityRepository, ILessonRepository lessonRepository, ILessonService lessonService)
     {
-        public async Task<UseCaseResult> ExecuteAsync(string unityName, Guid publicUserId)
+        public async Task<UseCaseResult<List<LessonDtoOut>>> ExecuteAsync(string unityName, Guid publicUserId)
         {
             var unity = await unityRepository.GetAsync(u => u.Name == unityName);
-            if (unity is null) return new()
-            {
-                Content = "Nenhuma unidade foi encontrada.",
-                StatusCode = HttpStatusCode.BadRequest
-            };
+            if (unity is null) return new() { StatusCode = HttpStatusCode.NoContent };
 
             var dblessons = await lessonRepository.GetListAsync(l => l.UnityId == unity.Id);
 

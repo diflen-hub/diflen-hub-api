@@ -1,10 +1,18 @@
+using System.ComponentModel;
 using System.Net;
 
 namespace Application.Dtos
 {
-    public class UseCaseResult
+    [Description("Objeto padrão retornado por todos os endpoints")]
+    public class UseCaseResult<T>
     {
-        public object? Content { get; set; }
+        [Description("Conteúdo da resposta")]
+        public T? Content { get; set; }
+
+        [Description("Mensagem amigável para o usuário")]
+        public string? Message { get; set; }
+
+        [Description("HttpStatus da resposta")]
         public HttpStatusCode StatusCode { get; set; } = HttpStatusCode.OK;
     }
 }
