@@ -1,6 +1,6 @@
-namespace Domain.Dtos
+namespace Application.Dtos
 {
-    public class UnityDtoOut
+    public class UnityResponseDto
     {
         public Guid PublicId { get; set; }
         public string Name { get; set; } = string.Empty;
