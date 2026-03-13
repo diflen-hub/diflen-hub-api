@@ -1,4 +1,3 @@
-using System.Net;
 using Application.Dtos;
 using Domain.Dtos;
 using Domain.Interfaces.Repositories;
@@ -11,7 +10,7 @@ namespace Application.UseCases
         public async Task<UseCaseResult<List<LessonDtoOut>>> ExecuteAsync(string unityName, Guid publicUserId)
         {
             var unity = await unityRepository.GetAsync(u => u.Name == unityName);
-            if (unity is null) return new() { StatusCode = HttpStatusCode.NoContent };
+            if (unity is null) return new() { Content = [] };
 
             var dblessons = await lessonRepository.GetListAsync(l => l.UnityId == unity.Id);
 

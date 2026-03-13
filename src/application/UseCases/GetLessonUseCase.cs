@@ -6,13 +6,10 @@ using Domain.Interfaces.Services;
 
 namespace Application.UseCases
 {
-    public class GetLessonUseCase(IUnityRepository unityRepository, ILessonRepository lessonRepository, ILessonService lessonService, IAnswerService answerService)
+    public class GetLessonUseCase(ILessonRepository lessonRepository, ILessonService lessonService, IAnswerService answerService)
     {
-        public async Task<UseCaseResult<LessonDtoOut>> ExecuteAsync(string unityName, Guid publicLessonId, Guid publicUserId)
+        public async Task<UseCaseResult<LessonDtoOut>> ExecuteAsync(Guid publicLessonId, Guid publicUserId)
         {
-            var unity = await unityRepository.GetAsync(u => u.Name == unityName);
-            if (unity is null) return new() { StatusCode = HttpStatusCode.NoContent };
-
             var lessonFromDb = await lessonRepository.GetLesson(publicLessonId);
             if (lessonFromDb is null) return new() { StatusCode = HttpStatusCode.NoContent };
 

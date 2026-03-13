@@ -14,27 +14,27 @@ namespace API.Controllers;
 [Authorize]
 public class UnityController(IUnityRepository unityRepository, GetUnityUseCase getUnityUseCase) : ControllerBase
 {
-    [HttpGet]
     [EndpointSummary("Obter lista")]
     [EndpointDescription("Retorna todas as unidades")]
-    public async Task<UseCaseResult<List<UnityDtoOut>>> GetAll()
+    [ProducesResponseType<List<UnityDtoOut>>(StatusCodes.Status200OK)]
+    [HttpGet]
+    public async Task<List<UnityDtoOut>> GetAll()
     {
         var unities = await unityRepository.GetListAsync(u => true);
-        return new UseCaseResult<List<UnityDtoOut>>
+        return unities.Select(unity => new UnityDtoOut
         {
-            Content = unities.Select(unity => new UnityDtoOut
-            {
-                PublicId = unity.PublicId,
-                Name = unity.Name,
-                Description = unity.Description,
-            }).ToList()
-        };
+            PublicId = unity.PublicId,
+            Name = unity.Name,
+            Description = unity.Description,
+        }).ToList();
     }
 
-    [HttpGet("{unityName}")]
     [EndpointSummary("Obter unidade")]
     [EndpointDescription("Retorna uma única unidade")]
-    public async Task<ActionResult<UseCaseResult<UnityDtoOut>>> Get(string unityName)
+    [ProducesResponseType<UnityDtoOut>(StatusCodes.Status200OK, Description = "Quando a unidade é encontrada.")]
+    [ProducesResponseType(StatusCodes.Status204NoContent, Description = "Quando a unidade não é encontrada.")]
+    [HttpGet("{unityName}")]
+    public async Task<ActionResult<UnityDtoOut>> Get(string unityName)
     {
         var publicUserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value!;
         var result = await getUnityUseCase.ExecuteAsync(unityName, Guid.Parse(publicUserId));

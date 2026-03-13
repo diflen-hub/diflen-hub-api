@@ -9,14 +9,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    [EndpointGroupName("User")]
     [Route("api/user")]
     [ApiController]
     public class UsersController(IUserRepository userRepository, LoginUseCase loginUseCase, RegisterUseCase _useCase) : ControllerBase
     {
         [EndpointSummary("Registro")]
         [EndpointDescription("Cria um novo usuário.")]
-        [ProducesResponseType<string>(StatusCodes.Status201Created, Description = "Quando o usuário é criado com sucesso.")]
+        [ProducesResponseType<string>(StatusCodes.Status201Created)]
         [HttpPost("register")]
         public async Task<ActionResult<string>> Register(RegisterDtoIn registerDto)
         {
@@ -38,7 +37,7 @@ namespace API.Controllers
         [EndpointSummary("Obter perfil")]
         [EndpointDescription("Retorna os dados de qualquer usuário solicitado.")]
         [ProducesResponseType<ProfileResponseDto>(StatusCodes.Status200OK, Description = "Quando o usuário é encontrado.")]
-        [ProducesResponseType(StatusCodes.Status204NoContent, Description = "Quando o usuário não encontrado.")]
+        [ProducesResponseType(StatusCodes.Status204NoContent, Description = "Quando o usuário não é encontrado.")]
         [HttpGet]
         public async Task<ActionResult<ProfileResponseDto>> Profile([FromQuery][Required][Description("Nome de usuário que deseja buscar.")] string username)
         {

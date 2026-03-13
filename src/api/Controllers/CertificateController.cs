@@ -1,6 +1,6 @@
+using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 using API.Controllers.Dtos;
-using Application.Dtos;
 using Application.UseCases;
 using Domain.Interfaces.Repositories;
 using Microsoft.AspNetCore.Authorization;
@@ -11,13 +11,14 @@ namespace API.Controllers
     [Route("api/certificate")]
     [ApiController]
     [Authorize]
-
-    public class CertificateController(
-        IssueCertificateUseCase issueCertificateUseCase,
-        ICertificateRepository certificateRepository) : ControllerBase
+    public class CertificateController(IssueCertificateUseCase issueCertificateUseCase, ICertificateRepository certificateRepository) : ControllerBase
     {
+        [EndpointSummary("Emitir certificado")]
+        [EndpointDescription("Verifica se todas as questões da respectiva unidade já foram respondidas e emite um certificado para o usuário.")]
+        [ProducesResponseType<string>(StatusCodes.Status200OK, Description = "Quando o certificado é emitido com sucesso.")]
+        [ProducesResponseType<string>(StatusCodes.Status400BadRequest, Description = "Quando ocorre algum erro na validação das questões")]
         [HttpPost("issue")]
-        public async Task<ActionResult<UseCaseResult<object>>> IssueNewCertificate([FromQuery] string unityName)
+        public async Task<ActionResult<string>> IssueNewCertificate([FromQuery][Required] string unityName)
         {
             var publicUserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value!;
             var result = await issueCertificateUseCase.ExecuteAsync(Guid.Parse(publicUserId), unityName);
@@ -25,21 +26,20 @@ namespace API.Controllers
             return StatusCode((int)result.StatusCode, result.Content);
         }
 
-        [HttpGet("get-all")]
-        public async Task<UseCaseResult<List<CertificateGetAllResponse>>> GetUserCertificates()
+        [EndpointSummary("Obter lista")]
+        [EndpointDescription("Retorna lista de certificados por usuário.")]
+        [HttpGet]
+        public async Task<List<CertificateGetAllResponse>> GetUserCertificates()
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value!;
 
             var certificates = await certificateRepository.GetCertificatesByUserId(int.Parse(userId));
 
-            return new UseCaseResult<List<CertificateGetAllResponse>>
+            return certificates.Select(c => new CertificateGetAllResponse
             {
-                Content = certificates.Select(c => new CertificateGetAllResponse
-                {
-                    UnityName = c.Unity!.Name,
-                    CreatedAt = c.CreatedAt
-                }).ToList()
-            };
+                UnityName = c.Unity!.Name,
+                CreatedAt = c.CreatedAt
+            }).ToList();
         }
     }
 }
