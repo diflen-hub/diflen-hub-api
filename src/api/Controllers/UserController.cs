@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using Application.Dtos;
+using application.Dtos;
 using Application.UseCases;
 using Domain.Dtos;
 using Domain.Dtos.Login;
@@ -9,15 +9,16 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+    [EndpointGroupName("User")]
     [Route("api/user")]
     [ApiController]
     public class UsersController(IUserRepository userRepository, LoginUseCase loginUseCase, RegisterUseCase _useCase) : ControllerBase
     {
         [EndpointSummary("Registro")]
         [EndpointDescription("Cria um novo usuário.")]
-        [ProducesResponseType(StatusCodes.Status201Created, Description = "Quando o usuário é criado com sucesso.")]
+        [ProducesResponseType<string>(StatusCodes.Status201Created, Description = "Quando o usuário é criado com sucesso.")]
         [HttpPost("register")]
-        public async Task<ActionResult<UseCaseResult<object>>> Register(RegisterDtoIn registerDto)
+        public async Task<ActionResult<string>> Register(RegisterDtoIn registerDto)
         {
             var result = await _useCase.ExecuteAsync(registerDto.Email, registerDto.Username, registerDto.Password);
             return StatusCode((int)result.StatusCode, result.Content);
@@ -25,10 +26,10 @@ namespace API.Controllers
 
         [EndpointSummary("Login")]
         [EndpointDescription("Realiza login na API para obter token JWT.")]
-        [ProducesResponseType<UseCaseResult<LoginDtoOut>>(StatusCodes.Status200OK, Description = "Quando o login é realizado com sucesso.")]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized, Description = "Quando a senha ou usuário estão incorretos.")]
+        [ProducesResponseType<LoginResponseDto>(StatusCodes.Status200OK, Description = "Quando o login é realizado com sucesso.")]
+        [ProducesResponseType<LoginResponseDto>(StatusCodes.Status401Unauthorized, Description = "Quando a senha ou usuário estão incorretos.")]
         [HttpPost("login")]
-        public async Task<ActionResult<UseCaseResult<LoginDtoOut>>> Login(LoginDtoIn loginDto)
+        public async Task<ActionResult<LoginResponseDto>> Login(LoginDtoIn loginDto)
         {
             var result = await loginUseCase.ExecuteAsync(loginDto.Email, loginDto.Password);
             return StatusCode((int)result.StatusCode, result.Content);
@@ -36,24 +37,21 @@ namespace API.Controllers
 
         [EndpointSummary("Obter perfil")]
         [EndpointDescription("Retorna os dados de qualquer usuário solicitado.")]
-        [ProducesResponseType(StatusCodes.Status200OK, Description = "Quando o usuário é encontrado.")]
+        [ProducesResponseType<ProfileResponseDto>(StatusCodes.Status200OK, Description = "Quando o usuário é encontrado.")]
         [ProducesResponseType(StatusCodes.Status204NoContent, Description = "Quando o usuário não encontrado.")]
-        [HttpGet("profile")]
-        public async Task<ActionResult<UseCaseResult<ProfileDtoOut>>> Profile([FromQuery][Required][Description("Nome de usuário que deseja buscar.")] string username)
+        [HttpGet]
+        public async Task<ActionResult<ProfileResponseDto>> Profile([FromQuery][Required][Description("Nome de usuário que deseja buscar.")] string username)
         {
             var user = await userRepository.GetAsync(u => u.Username == username);
 
             if (user is null) return NoContent();
 
-            return Ok(new UseCaseResult<ProfileDtoOut>
+            return Ok(new ProfileResponseDto
             {
-                Content = new ProfileDtoOut
-                {
-                    PublicId = user.PublicId,
-                    Experience = user.Experience,
-                    Username = user.Username,
-                    ProfilePic = $"data:{user.FileType};base64,{System.Text.Encoding.UTF8.GetString(user.ProfilePicture ?? [])}",
-                }
+                PublicId = user.PublicId,
+                Experience = user.Experience,
+                Username = user.Username,
+                ProfilePic = $"data:{user.FileType};base64,{System.Text.Encoding.UTF8.GetString(user.ProfilePicture)}",
             });
         }
     }

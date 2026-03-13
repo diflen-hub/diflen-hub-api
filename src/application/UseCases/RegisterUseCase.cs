@@ -8,7 +8,7 @@ namespace Application.UseCases
 {
     public class RegisterUseCase(IUserRepository userRepository)
     {
-        public async Task<UseCaseResult<object>> ExecuteAsync(string email, string username, string password)
+        public async Task<UseCaseResult<string>> ExecuteAsync(string email, string username, string password)
         {
             var user = new User()
             {
@@ -22,7 +22,7 @@ namespace Application.UseCases
             return new()
             {
                 StatusCode = HttpStatusCode.Created,
-                Message = "Usuário criado com sucesso"
+                Content = "Usuário criado com sucesso"
             };
         }
     }

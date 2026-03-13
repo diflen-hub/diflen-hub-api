@@ -1,6 +1,6 @@
 namespace Domain.Dtos
 {
-    public class ProfileDtoOut
+    public class ProfileResponseDto
     {
         private readonly int LevelMultiplier = 75;
 
@@ -51,7 +51,7 @@ namespace Domain.Dtos
 
             if (experience == 0) return 0;
 
-            return (100 / (float)requiredNextLevelValue) * experience;
+            return 100 / (float)requiredNextLevelValue * experience;
         }
     }
 }

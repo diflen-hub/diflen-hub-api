@@ -1,6 +1,6 @@
 using System.Net;
+using application.Dtos;
 using Application.Dtos;
-using Domain.Dtos;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
 
@@ -8,7 +8,7 @@ namespace Application.UseCases
 {
     public class LoginUseCase(IUserRepository userRepository, IJwtService jwtService)
     {
-        public async Task<UseCaseResult<LoginDtoOut>> ExecuteAsync(string email, string password)
+        public async Task<UseCaseResult<LoginResponseDto>> ExecuteAsync(string email, string password)
         {
             var userFromDatabase = await userRepository.GetAsync(u => u.Email == email);
 
@@ -17,8 +17,8 @@ namespace Application.UseCases
                 Content = new()
                 {
                     IsLogged = false,
+                    Message = "Usuário ou senha incorreto",
                 },
-                Message = "Usuário ou senha incorreto",
                 StatusCode = HttpStatusCode.Unauthorized
             };
 
@@ -27,20 +27,20 @@ namespace Application.UseCases
                 Content = new()
                 {
                     IsLogged = false,
+                    Message = "Usuário ou senha incorreto",
                 },
-                Message = "Usuário ou senha incorreto",
                 StatusCode = HttpStatusCode.Unauthorized
             };
 
             return new()
             {
-                Content = new LoginDtoOut()
+                Content = new LoginResponseDto()
                 {
                     IsLogged = true,
                     AccessToken = jwtService.GenerateBearerToken(userFromDatabase),
                     ExpiresIn = jwtService.GetExpirationDate(),
+                    Message = "Successfully logged."
                 },
-                Message = "Successfully logged."
             };
         }
     }

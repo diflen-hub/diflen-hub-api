@@ -9,9 +9,6 @@ namespace Application.Dtos
         [Description("Conteúdo da resposta")]
         public T? Content { get; set; }
 
-        [Description("Mensagem amigável para o usuário")]
-        public string? Message { get; set; }
-
         [Description("HttpStatus da resposta")]
         public HttpStatusCode StatusCode { get; set; } = HttpStatusCode.OK;
     }
