@@ -1,6 +1,6 @@
-namespace Domain.Dtos
+namespace Domain.Entities
 {
-    public class ProfileResponseDto
+    public class ProfileEntity
     {
         private readonly int LevelMultiplier = 75;
 
