@@ -16,7 +16,7 @@ namespace Application.UseCases
                 return new()
                 {
                     StatusCode = HttpStatusCode.BadRequest,
-                    Message = "O nome da unidade está incorreto."
+                    Content = new() { Message = "O nome da unidade está incorreto." }
                 };
             }
 
@@ -26,7 +26,7 @@ namespace Application.UseCases
                 return new()
                 {
                     StatusCode = HttpStatusCode.BadRequest,
-                    Message = "Todas as questões já foram respondidas",
+                    Content = new() { Message = "Todas as questões já foram respondidas" },
                 };
             }
 
@@ -36,7 +36,7 @@ namespace Application.UseCases
                 return new()
                 {
                     StatusCode = HttpStatusCode.BadRequest,
-                    Message = "Não foi possível encontrar uma das alternativas de alguma questão",
+                    Content = new() { Message = "Não foi possível encontrar uma das alternativas de alguma questão" },
                 };
             }
 

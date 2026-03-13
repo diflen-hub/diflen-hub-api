@@ -6,5 +6,6 @@ namespace Domain.Dtos
         public int CurrentPointsWeight { get; set; }
         public bool WasAllQuestionsCorrectlyAnswered { get; set; }
         public bool WasCertificateAlreadyIssued { get; set; }
+        public string? Message { get; set; }
     }
 }
