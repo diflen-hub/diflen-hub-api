@@ -1,6 +1,6 @@
-namespace Domain.Dtos
+namespace Application.Dtos
 {
-    public class LessonDtoOut
+    public class LessonResponseDto
     {
         public Guid PublicId { get; set; }
         public string Title { get; set; } = string.Empty;
