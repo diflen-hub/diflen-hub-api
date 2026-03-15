@@ -1,12 +1,13 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace Domain.Dtos
+namespace api.Controllers.Requests
 {
-    public class RegisterDtoIn
+    public class RegisterRequestDto
     {
         [Description("E-mail comum.")]
         [Required]
+        [EmailAddress]
         public required string Email { get; set; }
 
         [Description("Nome de usuário, nickname")]

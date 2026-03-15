@@ -1,4 +1,5 @@
 using System.Security.Claims;
+using api.Controllers.Requests;
 using Application.UseCases;
 using Domain.Dtos;
 using Microsoft.AspNetCore.Authorization;
@@ -16,7 +17,7 @@ namespace API.Controllers
         [ProducesResponseType<GetLastAnswersOut>(StatusCodes.Status200OK, Description = "Quando as respostas foram validadas (independente se estavam corretas ou não).")]
         [ProducesResponseType<GetLastAnswersOut>(StatusCodes.Status400BadRequest, Description = "Quando é passado algum parâmetro ou Id incorreto nas respostas.")]
         [HttpPost("verify-answers")]
-        public async Task<ActionResult<GetLastAnswersOut>> VerifyAnswers([FromBody] AnswerVerifyIn answerVerifyIn)
+        public async Task<ActionResult<GetLastAnswersOut>> VerifyAnswers([FromBody] AnswerVerifyRequestDto answerVerifyIn)
         {
             var publicUserId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
             var result = await verifyAnswersUseCase.ExecuteAsync(answerVerifyIn, Guid.Parse(publicUserId));

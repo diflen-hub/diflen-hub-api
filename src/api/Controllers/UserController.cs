@@ -3,7 +3,6 @@ using System.ComponentModel.DataAnnotations;
 using api.Controllers.Requests;
 using application.Dtos;
 using Application.UseCases;
-using Domain.Dtos;
 using Domain.Entities;
 using Domain.Interfaces.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -18,7 +17,7 @@ namespace API.Controllers
         [EndpointDescription("Cria um novo usuário.")]
         [ProducesResponseType<string>(StatusCodes.Status201Created)]
         [HttpPost("register")]
-        public async Task<ActionResult<string>> Register(RegisterDtoIn registerDto)
+        public async Task<ActionResult<string>> Register(RegisterRequestDto registerDto)
         {
             var result = await _useCase.ExecuteAsync(registerDto.Email, registerDto.Username, registerDto.Password);
             return StatusCode((int)result.StatusCode, result.Content);
