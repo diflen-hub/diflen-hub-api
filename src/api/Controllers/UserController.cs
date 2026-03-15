@@ -1,9 +1,9 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using api.Controllers.Requests;
 using application.Dtos;
 using Application.UseCases;
 using Domain.Dtos;
-using Domain.Dtos.Login;
 using Domain.Entities;
 using Domain.Interfaces.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -29,7 +29,7 @@ namespace API.Controllers
         [ProducesResponseType<LoginResponseDto>(StatusCodes.Status200OK, Description = "Quando o login é realizado com sucesso.")]
         [ProducesResponseType<LoginResponseDto>(StatusCodes.Status401Unauthorized, Description = "Quando a senha ou usuário estão incorretos.")]
         [HttpPost("login")]
-        public async Task<ActionResult<LoginResponseDto>> Login(LoginDtoIn loginDto)
+        public async Task<ActionResult<LoginResponseDto>> Login(LoginRequestDto loginDto)
         {
             var result = await loginUseCase.ExecuteAsync(loginDto.Email, loginDto.Password);
             return StatusCode((int)result.StatusCode, result.Content);

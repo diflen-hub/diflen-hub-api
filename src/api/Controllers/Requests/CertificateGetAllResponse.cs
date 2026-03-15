@@ -1,4 +1,4 @@
-namespace API.Controllers.Dtos
+namespace api.Controllers.Requests
 {
     public class CertificateGetAllResponse
     {
