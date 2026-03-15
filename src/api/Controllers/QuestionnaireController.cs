@@ -17,10 +17,10 @@ namespace API.Controllers
         [ProducesResponseType<GetLastAnswersOut>(StatusCodes.Status200OK, Description = "Quando as respostas foram validadas (independente se estavam corretas ou não).")]
         [ProducesResponseType<GetLastAnswersOut>(StatusCodes.Status400BadRequest, Description = "Quando é passado algum parâmetro ou Id incorreto nas respostas.")]
         [HttpPost("verify-answers")]
-        public async Task<ActionResult<GetLastAnswersOut>> VerifyAnswers([FromBody] AnswerVerifyRequestDto answerVerifyIn)
+        public async Task<ActionResult<GetLastAnswersOut>> VerifyAnswers([FromBody] AnswerVerifyRequestDto answerVerifyRequest)
         {
             var publicUserId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
-            var result = await verifyAnswersUseCase.ExecuteAsync(answerVerifyIn, Guid.Parse(publicUserId));
+            var result = await verifyAnswersUseCase.ExecuteAsync(answerVerifyRequest.PublicLessonId, answerVerifyRequest.UnityName, answerVerifyRequest.Answers, Guid.Parse(publicUserId));
 
             return StatusCode((int)result.StatusCode, result.Content);
         }

@@ -1,5 +1,6 @@
 using System.Net;
 using Application.Dtos;
+using domain.Dtos.Publics;
 using Domain.Dtos;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
@@ -8,9 +9,9 @@ namespace Application.UseCases
 {
     public class VerifyAnswersUseCase(IUnityRepository unityRepository, ILessonService lessonService, IAnswerService answerService, IQuestionService questionService, ICertificateService certificateService)
     {
-        public async Task<UseCaseResult<GetLastAnswersOut>> ExecuteAsync(AnswerVerifyIn answerVerifyIn, Guid publicUserId)
+        public async Task<UseCaseResult<GetLastAnswersOut>> ExecuteAsync(Guid publicLessonId, string unityName, List<PublicAnswerDto> answers, Guid publicUserId)
         {
-            var unity = await unityRepository.GetAsync(u => u.Name == answerVerifyIn.UnityName);
+            var unity = await unityRepository.GetAsync(u => u.Name == unityName);
             if (unity is null)
             {
                 return new()
@@ -20,7 +21,6 @@ namespace Application.UseCases
                 };
             }
 
-            var publicLessonId = answerVerifyIn.PublicLessonId;
             if (await lessonService.LessonAreAlreadyAnswered(publicUserId, publicLessonId))
             {
                 return new()
@@ -30,7 +30,7 @@ namespace Application.UseCases
                 };
             }
 
-            var verifiedAnswers = await answerService.VerifyAnswersAsync(answerVerifyIn, publicUserId, unity.PublicId);
+            var verifiedAnswers = await answerService.VerifyAnswersAsync(publicLessonId, unityName, answers, publicUserId, unity.PublicId);
             if (verifiedAnswers is null)
             {
                 return new()

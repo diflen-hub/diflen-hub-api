@@ -1,3 +1,4 @@
+using domain.Dtos.Publics;
 using Domain.Dtos;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
@@ -36,13 +37,13 @@ namespace Infra.Services
             };
         }
 
-        public async Task<GetLastAnswersOut?> VerifyAnswersAsync(AnswerVerifyIn answerVerifyIn, Guid publicUserId, Guid publicUnityId)
+        public async Task<GetLastAnswersOut?> VerifyAnswersAsync(Guid publicLessonId, string unityName, List<PublicAnswerDto> answers, Guid publicUserId, Guid publicUnityId)
         {
             var answersToInsert = new List<Answer>();
             var user = await _userRepository.GetAsyncNotNull(user => user.PublicId == publicUserId);
             var unity = await _unityRepository.GetAsyncNotNull(unity => unity.PublicId == publicUnityId);
 
-            foreach (var answer in answerVerifyIn.Answers)
+            foreach (var answer in answers)
             {
                 var correctAlternative = await _alternativeService.GetCorrectAlternativeAsync(answer.PublicQuestionId);
                 if (correctAlternative is null) return null;
@@ -62,7 +63,7 @@ namespace Infra.Services
 
             await _unityRepository.InsertRangeAsync(answersToInsert);
 
-            var lastAnswers = await GetLastAnswersAsync(publicUserId, answerVerifyIn.PublicLessonId);
+            var lastAnswers = await GetLastAnswersAsync(publicUserId, publicLessonId);
 
             if (!lastAnswers.Answers.Any(ai => !ai.IsCorrect))
             {

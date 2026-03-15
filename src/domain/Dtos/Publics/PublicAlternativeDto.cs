@@ -1,6 +1,6 @@
-namespace api.Controllers.Requests
+namespace domain.Dtos.Publics
 {
-    public class AlternativeRequestDto
+    public class PublicAnswerDto
     {
         public Guid PublicQuestionId { get; set; }
         public Guid PublicAlternativeId { get; set; }

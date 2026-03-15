@@ -1,3 +1,4 @@
+using domain.Dtos.Publics;
 using Domain.Dtos;
 
 namespace Domain.Interfaces.Services
@@ -5,6 +6,6 @@ namespace Domain.Interfaces.Services
     public interface IAnswerService
     {
         Task<GetLastAnswersOut> GetLastAnswersAsync(Guid publicUserId, Guid publicLessonId);
-        Task<GetLastAnswersOut?> VerifyAnswersAsync(AnswerVerifyIn answerVerifyIn, Guid publicUserId, Guid publicUnityId);
+        Task<GetLastAnswersOut?> VerifyAnswersAsync(Guid publicLessonId, string unityName, List<PublicAnswerDto> answers, Guid publicUserId, Guid publicUnityId);
     }
 }
