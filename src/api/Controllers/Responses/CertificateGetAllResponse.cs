@@ -1,4 +1,4 @@
-namespace api.Controllers.Requests
+namespace api.Controllers.Responses
 {
     public class CertificateGetAllResponse
     {
