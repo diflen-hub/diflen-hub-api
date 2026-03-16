@@ -28,7 +28,7 @@ namespace API.Controllers
         [ProducesResponseType<LessonResponseDto>(StatusCodes.Status200OK, Description = "Quando a aula é encontrada.")]
         [ProducesResponseType(StatusCodes.Status204NoContent, Description = "Quando a aula não foi encontrada.")]
         [HttpGet]
-        public async Task<ActionResult<LessonResponseDto>> GetLesson([FromQuery] Guid publicLessonId)
+        public async Task<ActionResult<LessonResponseDto>> GetLesson([FromQuery][Required] Guid publicLessonId)
         {
             var publicUserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value!;
             var result = await getLessonUseCase.ExecuteAsync(publicLessonId, Guid.Parse(publicUserId));
