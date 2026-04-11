@@ -38,8 +38,8 @@ namespace API.Controllers
         [EndpointDescription("Retorna os dados públicos de qualquer usuário solicitado.")]
         [ProducesResponseType<ProfileEntity>(StatusCodes.Status200OK, Description = "Quando o usuário é encontrado.")]
         [ProducesResponseType(StatusCodes.Status204NoContent, Description = "Quando o usuário não é encontrado.")]
-        [HttpGet]
-        public async Task<ActionResult<ProfileEntity>> Profile([FromQuery][Required][Description("Nome de usuário que deseja buscar.")] string username)
+        [HttpGet("{username}")]
+        public async Task<ActionResult<ProfileEntity>> Profile([FromRoute][Required][Description("Nome de usuário que deseja buscar.")] string username)
         {
             var user = await userRepository.GetAsync(u => u.Username == username);
 

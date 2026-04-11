@@ -14,8 +14,8 @@ namespace API.Controllers
     {
         [EndpointSummary("Obter Lista")]
         [EndpointDescription("Retorna uma lista de aulas com base no nome da unidade")]
-        [HttpGet("list")]
-        public async Task<ActionResult<List<LessonResponseDto>>> GetLessonsFromUnity([FromQuery][Required] string unityName)
+        [HttpGet("list/{unityName}")]
+        public async Task<ActionResult<List<LessonResponseDto>>> GetLessonsFromUnity([FromRoute][Required] string unityName)
         {
             var publicUserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value!;
             var result = await getLessonsUseCase.ExecuteAsync(unityName, Guid.Parse(publicUserId));
@@ -27,11 +27,11 @@ namespace API.Controllers
         [EndpointDescription("Retorna uma Lesson baseada no seu PublicId")]
         [ProducesResponseType<LessonResponseDto>(StatusCodes.Status200OK, Description = "Quando a aula é encontrada.")]
         [ProducesResponseType(StatusCodes.Status204NoContent, Description = "Quando a aula não foi encontrada.")]
-        [HttpGet]
-        public async Task<ActionResult<LessonResponseDto>> GetLesson([FromQuery][Required] Guid publicLessonId)
+        [HttpGet("{unityName}/{lessonName}")]
+        public async Task<ActionResult<LessonResponseDto>> GetLesson(string unityName, string lessonName)
         {
             var publicUserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value!;
-            var result = await getLessonUseCase.ExecuteAsync(publicLessonId, Guid.Parse(publicUserId));
+            var result = await getLessonUseCase.ExecuteAsync(unityName, lessonName, Guid.Parse(publicUserId));
 
             return StatusCode((int)result.StatusCode, result.Content);
         }
