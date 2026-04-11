@@ -27,7 +27,7 @@ public class UnityController(IUnityRepository unityRepository, GetUnityUseCase g
         }).ToList();
     }
 
-    [EndpointSummary("Obter unidade")]
+    [EndpointSummary("Obter único")]
     [EndpointDescription("Retorna uma única unidade")]
     [ProducesResponseType<UnityResponseDto>(StatusCodes.Status200OK, Description = "Quando a unidade é encontrada.")]
     [ProducesResponseType(StatusCodes.Status204NoContent, Description = "Quando a unidade não é encontrada.")]

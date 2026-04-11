@@ -23,7 +23,7 @@ namespace API.Controllers
             return StatusCode((int)result.StatusCode, result.Content);
         }
 
-        [EndpointSummary("Obter Lesson")]
+        [EndpointSummary("Obter único")]
         [EndpointDescription("Retorna uma Lesson baseada no seu PublicId")]
         [ProducesResponseType<LessonResponseDto>(StatusCodes.Status200OK, Description = "Quando a aula é encontrada.")]
         [ProducesResponseType(StatusCodes.Status204NoContent, Description = "Quando a aula não foi encontrada.")]

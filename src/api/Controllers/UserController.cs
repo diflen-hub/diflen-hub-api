@@ -35,7 +35,7 @@ namespace API.Controllers
         }
 
         [EndpointSummary("Obter perfil")]
-        [EndpointDescription("Retorna os dados de qualquer usuário solicitado.")]
+        [EndpointDescription("Retorna os dados públicos de qualquer usuário solicitado.")]
         [ProducesResponseType<ProfileEntity>(StatusCodes.Status200OK, Description = "Quando o usuário é encontrado.")]
         [ProducesResponseType(StatusCodes.Status204NoContent, Description = "Quando o usuário não é encontrado.")]
         [HttpGet]
