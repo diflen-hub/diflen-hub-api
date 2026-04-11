@@ -4,7 +4,7 @@ using Domain.Interfaces.Repositories;
 
 namespace application.UseCases
 {
-    public class GetQuestionnaireUseCase(ILessonRepository _lessonRepository, IQuestionRepository _questionRepository, IAlternativeRepository _alternativeRepository)
+    public class GetQuestionnaireUseCase(ILessonRepository _lessonRepository, IQuestionRepository _questionRepository)
     {
         public async Task<UseCaseResult<IEnumerable<QuestionDtoOut>>> ExecuteAsync(string unityName, string lessonName)
         {

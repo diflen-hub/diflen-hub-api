@@ -13,10 +13,9 @@ namespace Application.UseCases
         {
             var userFromDatabase = await userRepository.GetAsync(u => u.Email == email);
 
-            var userDoesntExist = userFromDatabase is null;
             var passwordIsIncorrect = !Verify(password, userFromDatabase?.Password);
 
-            if (userDoesntExist || passwordIsIncorrect) return new()
+            if (userFromDatabase is null || passwordIsIncorrect) return new()
             {
                 Content = new()
                 {
