@@ -55,7 +55,6 @@ namespace API
             services.AddScoped<ILessonService, LessonService>();
             services.AddScoped<IAlternativeService, AlternativeService>();
             services.AddScoped<IAnswerService, AnswerService>();
-            services.AddScoped<ICertificateService, CertificateService>();
             services.AddScoped<IQuestionService, QuestionService>();
             services.AddScoped<IJwtService, JwtService>();
 

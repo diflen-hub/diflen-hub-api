@@ -7,7 +7,6 @@ using Domain.Models;
 namespace Application.UseCases
 {
     public class IssueCertificateUseCase(
-        ICertificateService certificateService,
         IQuestionService questionService,
         ICertificateRepository certificateRepository,
         IUserRepository userRepository,
@@ -26,7 +25,8 @@ namespace Application.UseCases
                 StatusCode = HttpStatusCode.BadRequest
             };
 
-            if (await certificateService.WasCertificateAlreadyIssued(publicUserId, unity.PublicId))
+            var existentCertificate = await certificateRepository.GetAsync(c => c.User!.PublicId == publicUserId && c.Unity!.PublicId == unity.PublicId);
+            if (existentCertificate is not null)
             {
                 return new()
                 {
@@ -45,8 +45,8 @@ namespace Application.UseCases
                 };
 
                 await certificateRepository.InsertAsync(certificate);
-                
-                result = new ()
+
+                result = new()
                 {
                     Content = "Certificado emitido com sucesso!",
                 };

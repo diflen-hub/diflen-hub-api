@@ -1,8 +1,6 @@
-using System.Collections.Immutable;
 using System.Security.Claims;
 using Application.Dtos;
 using Application.UseCases;
-using Domain.Dtos;
 using Domain.Interfaces.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
