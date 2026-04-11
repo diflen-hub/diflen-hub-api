@@ -3,6 +3,7 @@ using application.Dtos;
 using Application.Dtos;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
+using static BCrypt.Net.BCrypt;
 
 namespace Application.UseCases
 {
@@ -12,22 +13,14 @@ namespace Application.UseCases
         {
             var userFromDatabase = await userRepository.GetAsync(u => u.Email == email);
 
-            if (userFromDatabase is null) return new()
-            {
-                Content = new()
-                {
-                    IsLogged = false,
-                    Message = "Usuário ou senha incorreto",
-                },
-                StatusCode = HttpStatusCode.Unauthorized
-            };
+            var userDoesntExist = userFromDatabase is null;
+            var passwordIsIncorrect = !Verify(password, userFromDatabase?.Password);
 
-            if (!BCrypt.Net.BCrypt.Verify(password, userFromDatabase.Password)) return new()
+            if (userDoesntExist || passwordIsIncorrect) return new()
             {
                 Content = new()
                 {
-                    IsLogged = false,
-                    Message = "Usuário ou senha incorreto",
+                    Message = "E-mail ou senha incorretos",
                 },
                 StatusCode = HttpStatusCode.Unauthorized
             };
