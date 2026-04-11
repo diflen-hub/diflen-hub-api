@@ -5,6 +5,6 @@ namespace Domain.Dtos
         public Guid PublicId { get; set; }
         public string Statement { get; set; } = string.Empty;
 
-        public ICollection<AlternativeDtoOut> Alternatives { get; set; } = [];
+        public IEnumerable<AlternativeDtoOut> Alternatives { get; set; } = [];
     }
 }

@@ -18,5 +18,6 @@ namespace Domain.Models
         public int UnityId { get; set; }
 
         public required ICollection<Question> Questions { get; set; }
+        public required Unity Unity { get; set; }
     }
 }

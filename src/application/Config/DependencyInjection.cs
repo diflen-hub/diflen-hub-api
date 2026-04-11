@@ -1,3 +1,4 @@
+using application.UseCases;
 using Application.UseCases;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -21,6 +22,7 @@ namespace application.Config
             services.AddScoped<RegisterUseCase>();
             services.AddScoped<VerifyAnswersUseCase>();
             services.AddScoped<GetUnityUseCase>();
+            services.AddScoped<GetQuestionnaireUseCase>();
         }
     }
 }

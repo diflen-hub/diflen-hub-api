@@ -7,9 +7,9 @@ namespace Application.UseCases
 {
     public class GetLessonUseCase(ILessonRepository lessonRepository, ILessonService lessonService)
     {
-        public async Task<UseCaseResult<LessonResponseDto>> ExecuteAsync(Guid publicLessonId, Guid publicUserId)
+        public async Task<UseCaseResult<LessonResponseDto>> ExecuteAsync(string unityName, string lessonName, Guid publicUserId)
         {
-            var lessonFromDb = await lessonRepository.GetLesson(publicLessonId);
+            var lessonFromDb = await lessonRepository.GetLesson(unityName, lessonName);
             if (lessonFromDb is null) return new() { StatusCode = HttpStatusCode.NoContent };
 
             return new()

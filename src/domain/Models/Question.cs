@@ -13,7 +13,8 @@ namespace Domain.Models
         [Column("unity_id")]
         public int UnityId { get; set; }
 
-        public required ICollection<Alternative> Alternatives { get; set; }
         public required Unity Unity { get; set; }
+        public required Lesson Lesson { get; set; }
+        public required ICollection<Alternative> Alternatives { get; set; }
     }
 }

@@ -19,6 +19,6 @@ namespace Domain.Models
         public string? FileType { get; set; }
 
         [Column("profile_picture")]
-        public byte[] ProfilePicture { get; set; } = [];
+        public byte[]? ProfilePicture { get; set; } = [];
     }
 }

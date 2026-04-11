@@ -10,7 +10,8 @@ namespace Infra.Services
     public class AnswerService(
         AppDbContext _context,
         IAlternativeService _alternativeService,
-        IAnswerRepository _unityRepository,
+        IUnityRepository _unityRepository,
+        IAnswerRepository _answerRepository,
         IUserRepository _userRepository,
         IAlternativeRepository _alternativeRepository) : IAnswerService
     {
@@ -61,7 +62,7 @@ namespace Infra.Services
                 });
             }
 
-            await _unityRepository.InsertRangeAsync(answersToInsert);
+            await _answerRepository.InsertRangeAsync(answersToInsert);
 
             var lastAnswers = await GetLastAnswersAsync(publicUserId, publicLessonId);
 
