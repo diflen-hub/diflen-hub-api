@@ -28,12 +28,13 @@ namespace API.Controllers
 
         [EndpointSummary("Obter lista")]
         [EndpointDescription("Retorna lista de certificados por usuário.")]
+        [ProducesResponseType<List<CertificateGetAllResponse>>(StatusCodes.Status200OK)]
         [HttpGet]
         public async Task<List<CertificateGetAllResponse>> GetUserCertificates()
         {
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value!;
+            var publicUserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value!;
 
-            var certificates = await certificateRepository.GetCertificatesByUserId(int.Parse(userId));
+            var certificates = await certificateRepository.GetCertificatesByUserId(Guid.Parse(publicUserId));
 
             return certificates.Select(c => new CertificateGetAllResponse
             {

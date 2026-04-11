@@ -20,6 +20,8 @@ namespace Infra.Services
         private async Task<List<Answer>> GetAnswersByUserAndLesson(Guid publicUserId, Guid publicLessonId)
         {
             return await _context.Answers
+                .Include(a => a.Question)
+                .Include(a => a.Alternative)
                 .Where(a => a.User.PublicId == publicUserId && a.Lesson.PublicId == publicLessonId)
                 .OrderByDescending(a => a.CreatedAt)
                 .ToListAsync();

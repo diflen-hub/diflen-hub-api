@@ -1,4 +1,5 @@
 using System.Security.Claims;
+using api.Controllers.Responses;
 using Application.Dtos;
 using Application.UseCases;
 using Domain.Interfaces.Repositories;
@@ -14,14 +15,13 @@ public class UnityController(IUnityRepository unityRepository, GetUnityUseCase g
 {
     [EndpointSummary("Obter lista")]
     [EndpointDescription("Retorna todas as unidades")]
-    [ProducesResponseType<List<UnityResponseDto>>(StatusCodes.Status200OK)]
+    [ProducesResponseType<List<GetUnitiesResponse>>(StatusCodes.Status200OK)]
     [HttpGet]
-    public async Task<List<UnityResponseDto>> GetAll()
+    public async Task<List<GetUnitiesResponse>> GetAll()
     {
         var unities = await unityRepository.GetListAsync(u => true);
-        return unities.Select(unity => new UnityResponseDto
+        return unities.Select(unity => new GetUnitiesResponse
         {
-            PublicId = unity.PublicId,
             Name = unity.Name,
             Description = unity.Description,
         }).ToList();

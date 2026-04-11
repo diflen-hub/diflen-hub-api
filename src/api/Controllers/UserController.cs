@@ -6,6 +6,7 @@ using Application.UseCases;
 using Domain.Entities;
 using Domain.Interfaces.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using static System.Text.Encoding;
 
 namespace API.Controllers
 {
@@ -50,7 +51,7 @@ namespace API.Controllers
                 PublicId = user.PublicId,
                 Experience = user.Experience,
                 Username = user.Username,
-                ProfilePic = $"data:{user.FileType};base64,{System.Text.Encoding.UTF8.GetString(user.ProfilePicture)}",
+                ProfilePic = $"data:{user.FileType};base64,{UTF8.GetString(user.ProfilePicture ?? [])}",
             });
         }
     }

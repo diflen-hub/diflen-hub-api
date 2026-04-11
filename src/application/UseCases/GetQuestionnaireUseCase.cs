@@ -22,7 +22,6 @@ namespace application.UseCases
                     Alternatives = question.Alternatives.Select(alt => new AlternativeDtoOut
                     {
                         PublicId = alt.PublicId,
-                        QuestionId = alt.QuestionId,
                         Text = alt.Text
                     })
                 }),

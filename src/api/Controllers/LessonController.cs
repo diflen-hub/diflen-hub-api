@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
+using api.Controllers.Responses;
 using Application.Dtos;
 using Application.UseCases;
 using Microsoft.AspNetCore.Authorization;
@@ -15,12 +16,16 @@ namespace API.Controllers
         [EndpointSummary("Obter Lista")]
         [EndpointDescription("Retorna uma lista de aulas com base no nome da unidade")]
         [HttpGet("list/{unityName}")]
-        public async Task<ActionResult<List<LessonResponseDto>>> GetLessonsFromUnity([FromRoute][Required] string unityName)
+        public async Task<ActionResult<List<GetLessonsResponse>>> GetLessonsFromUnity([FromRoute][Required] string unityName)
         {
             var publicUserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value!;
             var result = await getLessonsUseCase.ExecuteAsync(unityName, Guid.Parse(publicUserId));
 
-            return StatusCode((int)result.StatusCode, result.Content);
+            return StatusCode((int)result.StatusCode, result.Content?.Select(l => new GetLessonsResponse
+            {
+                Title = l.Title,
+                Concluded = l.Concluded
+            }));
         }
 
         [EndpointSummary("Obter único")]
