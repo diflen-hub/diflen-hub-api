@@ -1,13 +1,12 @@
 using System.Text;
-using API.Middlewares;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
-namespace API
+namespace api.Extensions
 {
-    internal static class Startup
+    public static class JwtExtensions
     {
-        internal static void ConfigureJwt(IServiceCollection services, ConfigurationManager configuration)
+        public static void AddJwt(this IServiceCollection services, ConfigurationManager configuration)
         {
             var key = configuration["JwtConfig:Key"] ?? throw new KeyNotFoundException("The environment was not prepared to set key");
 
@@ -36,12 +35,7 @@ namespace API
             services.AddAuthorization();
         }
 
-        internal static void ConfigureMiddlewares(WebApplication app)
-        {
-            app.UseMiddleware<ApiMiddleware>();
-        }
-
-        internal static void UseJwt(WebApplication app)
+        public static void UseJwt(this WebApplication app)
         {
             app.UseAuthentication();
             app.UseAuthorization();
