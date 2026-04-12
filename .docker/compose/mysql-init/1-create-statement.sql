@@ -15,7 +15,7 @@ create table users(
 create table unities(
     id int primary key auto_increment,
     public_id varchar(36) not null unique,
-    name varchar(255) not null,
+    name varchar(255) not null unique,
     description text
 );
 
@@ -32,7 +32,7 @@ create table certificates(
 create table lessons(
     id int primary key auto_increment,
     public_id varchar(36) not null unique,
-    title varchar(100) not null,
+    title varchar(100) not null unique,
     description text,
     sequence int not null,
     video_url varchar(255) not null,
