@@ -30,6 +30,7 @@ namespace Application.UseCases
                 {
                     IsLogged = true,
                     AccessToken = jwtService.GenerateBearerToken(userFromDatabase),
+                    Username = userFromDatabase.Username,
                     ExpiresIn = jwtService.GetExpirationDate(),
                     Message = "Successfully logged."
                 },
