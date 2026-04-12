@@ -1,10 +1,10 @@
 services:
   db:
-    container_name: api-diflen-hub-mysql
+    container_name: diflen-hub-mysql
     image: mysql
     environment:
       MYSQL_ROOT_PASSWORD: 12345
-      MYSQL_DATABASE: apidiflenhub
+      MYSQL_DATABASE: diflenhub
     ports:
       - 3306:3306
     volumes:

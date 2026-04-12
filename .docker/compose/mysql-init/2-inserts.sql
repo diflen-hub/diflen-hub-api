@@ -1,7 +1,7 @@
 SET NAMES utf8mb4;
 SET CHARACTER SET utf8mb4;
 
-use apidiflenhub;
+use diflenhub;
 
 insert into users(
     public_id,

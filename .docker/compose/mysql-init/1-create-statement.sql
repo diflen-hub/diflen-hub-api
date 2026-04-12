@@ -1,4 +1,4 @@
-use apidiflenhub;
+use diflenhub;
 
 create table users(
     id int primary key auto_increment,
