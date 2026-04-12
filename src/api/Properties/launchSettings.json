@@ -1,16 +1,6 @@
 ﻿{
   "$schema": "https://json.schemastore.org/launchsettings.json",
   "profiles": {
-    "http": {
-      "commandName": "Project",
-      "dotnetRunMessages": true,
-      "launchBrowser": false,
-      "launchUrl": "scalar",
-      "applicationUrl": "http://localhost:5165",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Production"
-      }
-    },
     "https": {
       "commandName": "Project",
       "dotnetRunMessages": true,

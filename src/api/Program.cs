@@ -12,6 +12,7 @@ Startup.ConfigureJwt(builder.Services, builder.Configuration);
 builder.Services.AddScalar();
 
 var app = builder.Build();
+app.UseHttpsRedirection();
 
 app.UseScalar();
 Startup.UseJwt(app);
