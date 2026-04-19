@@ -1,5 +1,7 @@
+using domain.Interfaces.Services;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
+using infra.Services;
 using Infra;
 using Infra.Repositories;
 using Infra.Services;
@@ -37,6 +39,7 @@ namespace infra.Config
             services.AddScoped<IAnswerService, AnswerService>();
             services.AddScoped<IQuestionService, QuestionService>();
             services.AddScoped<IJwtService, JwtService>();
+            services.AddTransient<IPlaylistService, PlaylistService>();
         }
     }
 }
