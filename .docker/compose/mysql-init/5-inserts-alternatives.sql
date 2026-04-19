@@ -1,0 +1,85 @@
+SET NAMES utf8mb4;
+SET CHARACTER SET utf8mb4;
+
+use diflenhub;
+
+insert into alternatives(public_id, text, is_correct, question_id)
+values
+    ("80c149cd-3ef3-4c80-b1d8-7fbbfd8c2693", "Texto f da alternativa", false, 1),
+    ("e5b0710d-9842-47f1-b094-3c30e5a93270", "Texto 3 da alternativa", true, 1),
+    ("af765fe3-c287-4c75-a5ce-e062cfe2b986", "Texto b da alternativa", false, 1),
+    ("c72d0e77-3ef7-4dc6-a55b-d040f061a637", "Texto 5 da alternativa", false, 1),
+    ("01f9b7e0-93f4-4621-ab43-b1e6c6b1a34e", "Texto 5 da alternativa", false, 2),
+    ("b6d5fd89-107f-4585-972a-39e16225b5b8", "Texto 0 da alternativa", false, 2),
+    ("68a24cf7-a434-4b47-94ee-ea1cfc71a481", "Texto 1 da alternativa", true, 2),
+    ("0c8a496b-423a-4a3c-b168-ea7812e88502", "Texto b da alternativa", false, 2),
+    ("22f629cd-145a-4403-9858-e5e27846306a", "Texto c da alternativa", true, 3),
+    ("54acc19d-09e3-4c93-b687-31dafa0a1f4b", "Texto 3 da alternativa", false, 3),
+    ("6c2d1b0d-6c84-4b20-a8f9-5f7a4c67ee26", "Texto 9 da alternativa", false, 3),
+    ("6b8306f2-19eb-4201-a80d-48737f316366", "Texto a da alternativa", false, 3),
+    ("b78ab888-c7a2-41b8-9aac-f56d60b3b7bf", "Texto 1 da alternativa", false, 4),
+    ("8443be98-42c9-4ca7-8ad3-2978fe0b60b9", "Texto 8 da alternativa", false, 4),
+    ("e3be774d-be78-417c-9ae0-4426fdcac033", "Texto c da alternativa", true, 4),
+    ("03fdcf2c-cf34-45e6-b4ca-56eb301a7204", "Texto 5 da alternativa", false, 4),
+    ("0c7f6a2d-295a-41fb-a40d-4b2788e2e662", "Texto 9 da alternativa", false, 5),
+    ("593e9d35-82dc-4952-99f7-d6c0031dc9e0", "Texto 8 da alternativa", false, 5),
+    ("4457b265-f749-4a08-87b4-953baa730344", "Texto 5 da alternativa", true, 5),
+    ("e6d5cbe9-42c4-4a4e-9392-384d2956a1ff", "Texto 7 da alternativa", false, 5),
+    ("02db9eab-4149-4f2e-8502-10db41ced859", "Texto 8 da alternativa", true, 6),
+    ("0a409df7-2987-466f-b7cf-4e91336c23a4", "Texto 0 da alternativa", false, 6),
+    ("29cf7fa1-f9f3-405b-b2e8-88f30a0746f8", "Texto e da alternativa", false, 6),
+    ("bed2a7ed-8657-427f-b36b-276216fc787e", "Texto 9 da alternativa", false, 6);
+
+insert into alternatives(public_id, text, is_correct, question_id)
+values
+    ("5f3eed57-0308-405d-b089-a1c8f13387ea", "Texto f da alternativa", false, 7),
+    ("eda2e4c3-7d99-4b44-80a0-2b2b87990fd3", "Texto 3 da alternativa", true, 7),
+    ("ff71cb80-4637-413a-9321-45cab792510d", "Texto b da alternativa", false, 7),
+    ("d5652716-66f2-4919-8c6c-76cf83f3dbbc", "Texto 5 da alternativa", false, 7),
+    ("f8645c2f-4f2b-4f5e-863d-c34bb60c2033", "Texto 5 da alternativa", false, 8),
+    ("890fc7ed-26ec-460a-8c30-9ea0dc0fc823", "Texto 0 da alternativa", false, 8),
+    ("b8aa8504-c670-43a5-bb69-7cb6962abba9", "Texto 1 da alternativa", true, 8),
+    ("8f7280dc-9b7b-4184-9a06-aca951d29c15", "Texto b da alternativa", false, 8),
+    ("c85b5bf7-591b-42b9-b265-3d617bf66f82", "Texto c da alternativa", true, 9),
+    ("8ba238d0-f014-4cd5-98f6-1363f2b50bde", "Texto 3 da alternativa", false, 9),
+    ("0cbcff2f-7cbb-490d-93b1-eea84b179fed", "Texto 9 da alternativa", false, 9),
+    ("3f7102e8-c831-4fe4-a52f-8434f394d3c0", "Texto a da alternativa", false, 9),
+    ("39be1a44-9e68-46c9-8724-f7266f6d9f0c", "Texto 1 da alternativa", false, 10),
+    ("0accb9cc-9e6c-4851-88fe-62f6948fca18", "Texto 8 da alternativa", false, 10),
+    ("2a23bdda-d6aa-4cd3-8569-029c9f8354a6", "Texto c da alternativa", true, 10),
+    ("43191cc0-703d-4d1a-94fe-7fd8ccbdfb26", "Texto 5 da alternativa", false, 10),
+    ("b46f2c48-b8ce-43c0-a60a-8fbd8c6c2f4c", "Texto 9 da alternativa", false, 11),
+    ("34f5e59f-7116-416b-8da2-93c650a96336", "Texto 8 da alternativa", false, 11),
+    ("7c3f448d-5547-4bc7-aeb4-5f5757fe4331", "Texto 5 da alternativa", true, 11),
+    ("2ca73186-6d8b-4f4e-9411-bfe088783a25", "Texto 7 da alternativa", false, 11),
+    ("cbcd8a35-42aa-4f38-ba3b-729237e2843c", "Texto 8 da alternativa", true, 12),
+    ("ed2871df-7d11-4c30-b265-3b66dd0fe3aa", "Texto 0 da alternativa", false, 12),
+    ("a1a5bff6-4c02-4832-b86a-b3b741f058f7", "Texto e da alternativa", false, 12),
+    ("9fd685af-6d66-41ba-bc06-e209d3113aa4", "Texto 9 da alternativa", false, 12);
+
+insert into alternatives(public_id, text, is_correct, question_id)
+values
+    ("26fde394-6caf-426a-a6bd-d66142a61c1c", "Texto f da alternativa", false, 13),
+    ("24c15723-44d3-4b08-b764-60ce9a2b719e", "Texto 3 da alternativa", true, 13),
+    ("3b121a9f-5c6b-42a4-aff8-57615207b1e3", "Texto b da alternativa", false, 13),
+    ("1b467782-a740-4fda-bf6a-ce6254e35dc7", "Texto 5 da alternativa", false, 13),
+    ("cd19804e-f068-44ed-b9dd-4f0ba521b829", "Texto 5 da alternativa", false, 14),
+    ("06be58bd-96ec-4e92-afdd-cdb1fed468b7", "Texto 0 da alternativa", false, 14),
+    ("3a8c847e-5cf5-4e8b-bc84-8939c1ed5e23", "Texto 1 da alternativa", true, 14),
+    ("b390c491-47f1-4acc-88ff-2fbec40a8759", "Texto b da alternativa", false, 14),
+    ("7c1bf057-0851-4fcc-a311-bcb9ee9c062a", "Texto c da alternativa", true, 15),
+    ("37009cf5-bece-4a2d-963f-72687bc60903", "Texto 3 da alternativa", false, 15),
+    ("be08b808-bd51-42ea-9ec0-33ec7d79051c", "Texto 9 da alternativa", false, 15),
+    ("2c51b0a4-5495-433d-aae5-7cddc73f9a0f", "Texto a da alternativa", false, 15),
+    ("d7080800-41e3-4bb7-97ac-b9edd85bbf79", "Texto 1 da alternativa", false, 16),
+    ("25237831-bc44-4195-b2ba-5d07cdc8d539", "Texto 8 da alternativa", false, 16),
+    ("e3cd20d3-4d21-4636-ab3f-45fd308018ed", "Texto c da alternativa", true, 16),
+    ("8dd5db50-5755-4631-8e8f-4d70f794a978", "Texto 5 da alternativa", false, 16),
+    ("cfa80fba-5620-4159-af58-b90112462379", "Texto 9 da alternativa", false, 17),
+    ("a79590af-282e-47ab-a4e0-d0a04f6bd99d", "Texto 8 da alternativa", false, 17),
+    ("b6b222ac-4d37-4530-a873-3e1a85523537", "Texto 5 da alternativa", true, 17),
+    ("82b2b1e7-7956-4de3-98d0-ae8704d87fbb", "Texto 7 da alternativa", false, 17),
+    ("6af1e583-90d2-42d0-8472-9b3ffb445807", "Texto 8 da alternativa", true, 18),
+    ("ec68e72b-4c78-40a2-887e-2091202b3b55", "Texto 0 da alternativa", false, 18),
+    ("dc95dcad-ba3f-4c95-b36b-42124393a693", "Texto e da alternativa", false, 18),
+    ("4c661856-8bc9-4e20-b9b4-92183d1579a9", "Texto 9 da alternativa", false, 18);
