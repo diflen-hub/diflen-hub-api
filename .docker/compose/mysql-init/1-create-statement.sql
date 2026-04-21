@@ -1,21 +1,21 @@
-use apidiflenhub;
+use diflenhub;
 
 create table users(
     id int primary key auto_increment,
     public_id varchar(36) not null unique,
-    email varchar(50) not null,
-    username varchar(30) not null,
+    username varchar(30) not null unique,
     password varchar(255) not null,
-    experience int default 0,
+    experience int not null default 0,
     status boolean default true,
     file_type varchar(30),
-    profile_picture blob
+    profile_picture blob,
+    role int not null default 0
 );
 
 create table unities(
     id int primary key auto_increment,
     public_id varchar(36) not null unique,
-    name varchar(255) not null,
+    name varchar(255) not null unique,
     description text
 );
 
@@ -32,7 +32,7 @@ create table certificates(
 create table lessons(
     id int primary key auto_increment,
     public_id varchar(36) not null unique,
-    title varchar(100) not null,
+    title varchar(100) not null unique,
     description text,
     sequence int not null,
     video_url varchar(255) not null,

@@ -1,0 +1,25 @@
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using domain.Enums;
+
+namespace Domain.Models
+{
+    [Table("users")]
+    public class User : BaseEntity
+    {
+        public required string Username { get; set; }
+
+        public required string Password { get; set; }
+
+        public long Experience { get; set; }
+
+        public bool Status { get; set; }
+
+        [Column("file_type")]
+        public string? FileType { get; set; }
+
+        [Column("profile_picture")]
+        public byte[]? ProfilePicture { get; set; }
+
+        public Roles Role { get; set; }
+    }
+}

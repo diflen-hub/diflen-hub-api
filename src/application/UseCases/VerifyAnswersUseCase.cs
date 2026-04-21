@@ -1,0 +1,52 @@
+using System.Net;
+using Application.Dtos;
+using domain.Dtos.Publics;
+using Domain.Dtos;
+using Domain.Interfaces.Repositories;
+using Domain.Interfaces.Services;
+
+namespace Application.UseCases
+{
+    public class VerifyAnswersUseCase(IUnityRepository unityRepository, ILessonService lessonService, IAnswerService answerService, IQuestionService questionService, ICertificateRepository _certificateRepository)
+    {
+        public async Task<UseCaseResult<GetLastAnswersOut>> ExecuteAsync(Guid publicLessonId, string unityName, List<PublicAnswerDto> answers, Guid publicUserId)
+        {
+            var unity = await unityRepository.GetAsync(u => u.Name == unityName);
+            if (unity is null)
+            {
+                return new()
+                {
+                    StatusCode = HttpStatusCode.BadRequest,
+                    Content = new() { Message = "O nome da unidade está incorreto." }
+                };
+            }
+
+            if (await lessonService.LessonAreAlreadyAnswered(publicUserId, publicLessonId))
+            {
+                return new()
+                {
+                    StatusCode = HttpStatusCode.BadRequest,
+                    Content = new() { Message = "Todas as questões já foram respondidas" },
+                };
+            }
+
+            var verifiedAnswers = await answerService.VerifyAnswersAsync(publicLessonId, unityName, answers, publicUserId, unity.PublicId);
+            if (verifiedAnswers is null)
+            {
+                return new()
+                {
+                    StatusCode = HttpStatusCode.BadRequest,
+                    Content = new() { Message = "Não foi possível encontrar uma das alternativas de alguma questão" },
+                };
+            }
+
+            verifiedAnswers.WasAllQuestionsCorrectlyAnswered = await questionService.WasAllQuestionsCorrectlyAnswered(unity.PublicId, publicUserId);
+            verifiedAnswers.WasCertificateAlreadyIssued = await _certificateRepository.GetAsync(c => c.User!.PublicId == publicUserId && c.Unity!.PublicId == unity.PublicId) is not null;
+
+            return new()
+            {
+                Content = verifiedAnswers,
+            };
+        }
+    }
+}
