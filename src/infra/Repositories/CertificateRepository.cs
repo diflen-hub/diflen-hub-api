@@ -9,9 +9,9 @@ namespace Infra.Repositories
         public async Task<List<Certificate>> GetCertificatesByUserId(Guid publicUserId)
         {
             return await context.Certificates
-                .Where(c => c.PublicId == publicUserId)
                 .Include(c => c.Unity)
                 .Include(c => c.User)
+                .Where(c => c.User != null && c.User.PublicId == publicUserId)
                 .ToListAsync();
         }
     }
