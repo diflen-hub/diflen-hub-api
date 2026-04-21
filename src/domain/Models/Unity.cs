@@ -5,9 +5,9 @@ namespace Domain.Models
     [Table("unities")]
     public class Unity : BaseEntity
     {
-        public string Name { get; set; } = string.Empty;
-        public string? Description { get; set; } = string.Empty;
+        public required string Name { get; set; }
+        public string? Description { get; set; }
 
-        public required ICollection<Lesson> Lessons { get; set; }
+        public ICollection<Lesson> Lessons { get; set; } = [];
     }
 }

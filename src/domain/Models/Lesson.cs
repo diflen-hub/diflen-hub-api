@@ -17,7 +17,7 @@ namespace Domain.Models
         [Column("unity_id")]
         public int UnityId { get; set; }
 
-        public required ICollection<Question> Questions { get; set; }
+        public ICollection<Question> Questions { get; set; } = [];
         public required Unity Unity { get; set; }
     }
 }
