@@ -18,8 +18,9 @@ namespace API.Controllers
         [HttpGet("list/{unityName}")]
         public async Task<ActionResult<List<GetLessonsResponse>>> GetLessonsFromUnity([FromRoute][Required] string unityName)
         {
+            var decodedUnityName = Uri.UnescapeDataString(unityName);
             var publicUserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value!;
-            var result = await getLessonsUseCase.ExecuteAsync(unityName, Guid.Parse(publicUserId));
+            var result = await getLessonsUseCase.ExecuteAsync(decodedUnityName, Guid.Parse(publicUserId));
 
             return StatusCode((int)result.StatusCode, result.Content?.Select(l => new GetLessonsResponse
             {
@@ -35,8 +36,10 @@ namespace API.Controllers
         [HttpGet("{unityName}/{lessonName}")]
         public async Task<ActionResult<LessonResponseDto>> GetLesson(string unityName, string lessonName)
         {
+            var decodedUnityName = Uri.UnescapeDataString(unityName);
+            var decodedLessonName = Uri.UnescapeDataString(lessonName);
             var publicUserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value!;
-            var result = await getLessonUseCase.ExecuteAsync(unityName, lessonName, Guid.Parse(publicUserId));
+            var result = await getLessonUseCase.ExecuteAsync(decodedUnityName, decodedLessonName, Guid.Parse(publicUserId));
 
             return StatusCode((int)result.StatusCode, result.Content);
         }

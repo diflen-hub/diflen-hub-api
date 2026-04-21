@@ -32,7 +32,9 @@ namespace API.Controllers
         [HttpGet("{unityName}/{lessonName}")]
         public async Task<ActionResult<IEnumerable<QuestionDtoOut>>> GetList(string unityName, string lessonName)
         {
-            var result = await _getQuestionnaireUseCase.ExecuteAsync(unityName, lessonName);
+            var decodedUnityName = Uri.UnescapeDataString(unityName);
+            var decodedLessonName = Uri.UnescapeDataString(lessonName);
+            var result = await _getQuestionnaireUseCase.ExecuteAsync(decodedUnityName, decodedLessonName);
 
             return StatusCode((int)result.StatusCode, result.Content);
         }

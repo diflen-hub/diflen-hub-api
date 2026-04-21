@@ -20,8 +20,9 @@ namespace API.Controllers
         [HttpPost("issue")]
         public async Task<ActionResult<string>> IssueNewCertificate([FromQuery][Required] string unityName)
         {
+            var decodedUnityName = Uri.UnescapeDataString(unityName);
             var publicUserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value!;
-            var result = await issueCertificateUseCase.ExecuteAsync(Guid.Parse(publicUserId), unityName);
+            var result = await issueCertificateUseCase.ExecuteAsync(Guid.Parse(publicUserId), decodedUnityName);
 
             return StatusCode((int)result.StatusCode, result.Content);
         }

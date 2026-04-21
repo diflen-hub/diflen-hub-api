@@ -35,8 +35,9 @@ public class UnityController(IUnityRepository unityRepository, GetUnityUseCase g
     [HttpGet("{unityName}")]
     public async Task<ActionResult<UnityResponseDto>> Get(string unityName)
     {
+        var decodedUnityName = Uri.UnescapeDataString(unityName);
         var publicUserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value!;
-        var result = await getUnityUseCase.ExecuteAsync(unityName, Guid.Parse(publicUserId));
+        var result = await getUnityUseCase.ExecuteAsync(decodedUnityName, Guid.Parse(publicUserId));
         return StatusCode((int)result.StatusCode, result.Content);
     }
 
