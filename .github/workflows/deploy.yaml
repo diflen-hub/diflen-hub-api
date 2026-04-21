@@ -1,0 +1,23 @@
+name: deploy
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 10.0.x
+      - run: dotnet publish -c Release -o ./publish
+      - uses: ChristopheLav/iis-deploy@v1
+        with:
+          server-url: https://site64701.siteasp.net:8172
+          website-name: site64701
+          username: site64701
+          password: 12345678
+          package-path: ./publish
