@@ -7,7 +7,7 @@ namespace Domain.Interfaces.Repositories
         public Task<T?> GetAsync(Expression<Func<T, bool>> filter);
         public Task<T> GetAsyncNotNull(Expression<Func<T, bool>> filter);
         public Task<List<T>> GetListAsync(Expression<Func<T, bool>> filter);
-        public Task InsertAsync(T entity);
+        public Task<T> InsertAsync(T entity);
         public Task InsertRangeAsync(List<T> entities);
     }
 }

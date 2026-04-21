@@ -28,10 +28,11 @@ namespace Infra.Repositories
             return await _dbSet.Where(filter).ToListAsync();
         }
 
-        public async Task InsertAsync(T entity)
+        public async Task<T> InsertAsync(T entity)
         {
             await _dbSet.AddAsync(entity);
             await _context.SaveChangesAsync();
+            return entity;
         }
 
         public async Task InsertRangeAsync(List<T> entities)
