@@ -16,8 +16,8 @@ jobs:
       - run: dotnet publish -c Release -o ./publish
       - uses: ChristopheLav/iis-deploy@v1
         with:
-          msdeploy-service-url: https://site64701.siteasp.net:8172
-          website-name: site64701
-          msdeploy-username: site64701
-          msdeploy-password: 12345678
+          msdeploy-service-url: https://${{ secrets.SERVER_HOST }}:${{ secrets.SERVER_PORT }}
+          website-name: ${{ secrets.SERVER_SITE }}
+          msdeploy-username: ${{ secrets.SERVER_LOGIN }}
+          msdeploy-password: ${{ secrets.SERVER_PASSWORD }}
           source-path: ./publish
