@@ -17,7 +17,7 @@ jobs:
       - uses: ChristopheLav/iis-deploy@v1
         with:
           server-url: https://site64701.siteasp.net:8172
-          website-name: site64701
-          username: site64701
-          password: 12345678
+          websiteName: site64701
+          deployUserName: site64701
+          deployUserPassword: 12345678
           package-path: ./publish
