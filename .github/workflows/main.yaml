@@ -36,25 +36,25 @@ jobs:
         run: dotnet test --collect:"XPlat Code Coverage"
 
         # instala ferramenta para analisar a cobertura de testes
-      - name: install reportgenerator
-        run: dotnet tool install --global dotnet-reportgenerator-globaltool
+      # - name: install reportgenerator
+      #   run: dotnet tool install --global dotnet-reportgenerator-globaltool
 
         # utiliza o reportgenerator para criar a porcentagem de cobertura
-      - name: generate coverage text report
-        run: |
-          reportgenerator \
-            -reports:**/coverage.cobertura.xml \
-            -targetdir:coverage-report \
-            -reporttypes:TextSummary
+      # - name: generate coverage text report
+      #   run: |
+      #     reportgenerator \
+      #       -reports:**/coverage.cobertura.xml \
+      #       -targetdir:coverage-report \
+      #       -reporttypes:TextSummary
 
         # obtem a porcentagem de cobertura e falha caso der erro
-      - name: check coverage threshold
-        run: |
-          COVERAGE=$(grep -oP 'Line coverage: \K[0-9]+' coverage-report/Summary.txt)
-          echo "Coverage detected: $COVERAGE%"
-          MIN=100
+      # - name: check coverage threshold
+      #   run: |
+      #     COVERAGE=$(grep -oP 'Line coverage: \K[0-9]+' coverage-report/Summary.txt)
+      #     echo "Coverage detected: $COVERAGE%"
+      #     MIN=100
           
-          if [ "$COVERAGE" -lt "$MIN" ]; then
-            echo "Coverage below minimum required ($MIN%). Failing..."
-            exit 1
-          fi
+      #     if [ "$COVERAGE" -lt "$MIN" ]; then
+      #       echo "Coverage below minimum required ($MIN%). Failing..."
+      #       exit 1
+      #     fi

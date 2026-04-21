@@ -5,4 +5,4 @@
 
 project-dependency-graph.dot
 coverage_report
-tests/TestResults
+**/TestResults/
