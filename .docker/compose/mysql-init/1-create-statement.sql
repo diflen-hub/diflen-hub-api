@@ -3,8 +3,7 @@ use diflenhub;
 create table users(
     id int primary key auto_increment,
     public_id varchar(36) not null unique,
-    email varchar(50) not null,
-    username varchar(30) not null,
+    username varchar(30) not null unique,
     password varchar(255) not null,
     experience int default 0,
     status boolean default true,

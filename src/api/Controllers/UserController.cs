@@ -20,7 +20,7 @@ namespace API.Controllers
         [HttpPost("register")]
         public async Task<ActionResult<string>> Register(RegisterRequestDto registerDto)
         {
-            var result = await _useCase.ExecuteAsync(registerDto.Email, registerDto.Username, registerDto.Password);
+            var result = await _useCase.ExecuteAsync(registerDto.Username, registerDto.Password);
             return StatusCode((int)result.StatusCode, result.Content);
         }
 
@@ -31,7 +31,7 @@ namespace API.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<LoginResponseDto>> Login(LoginRequestDto loginDto)
         {
-            var result = await loginUseCase.ExecuteAsync(loginDto.Email, loginDto.Password);
+            var result = await loginUseCase.ExecuteAsync(loginDto.Username, loginDto.Password);
             return StatusCode((int)result.StatusCode, result.Content);
         }
 

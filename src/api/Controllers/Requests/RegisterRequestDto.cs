@@ -5,11 +5,6 @@ namespace api.Controllers.Requests
 {
     public class RegisterRequestDto
     {
-        [Description("E-mail comum.")]
-        [Required]
-        [EmailAddress]
-        public required string Email { get; set; }
-
         [Description("Nome de usuário, nickname")]
         [Required]
         public required string Username { get; set; }

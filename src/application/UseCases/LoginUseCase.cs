@@ -9,9 +9,9 @@ namespace Application.UseCases
 {
     public class LoginUseCase(IUserRepository userRepository, IJwtService jwtService)
     {
-        public async Task<UseCaseResult<LoginResponseDto>> ExecuteAsync(string email, string password)
+        public async Task<UseCaseResult<LoginResponseDto>> ExecuteAsync(string username, string password)
         {
-            var userFromDatabase = await userRepository.GetAsync(u => u.Email == email);
+            var userFromDatabase = await userRepository.GetAsync(u => u.Username == username);
 
             var passwordIsIncorrect = !Verify(password, userFromDatabase?.Password);
 

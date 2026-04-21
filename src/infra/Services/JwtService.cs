@@ -19,7 +19,6 @@ namespace Infra.Services
                 Subject = new ClaimsIdentity(
                 [
                     new Claim(JwtRegisteredClaimNames.Nickname, user.Username),
-                    new Claim(JwtRegisteredClaimNames.Email, user.Email),
                     new Claim(JwtRegisteredClaimNames.NameId, user.PublicId.ToString()),
                 ]),
                 Expires = GetExpirationDate(),
