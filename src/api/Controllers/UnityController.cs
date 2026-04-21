@@ -1,5 +1,6 @@
 using System.Security.Claims;
 using api.Controllers.Responses;
+using application.UseCases;
 using Application.Dtos;
 using Application.UseCases;
 using Domain.Interfaces.Repositories;
@@ -11,7 +12,7 @@ namespace API.Controllers;
 [Route("api/unity")]
 [ApiController]
 [Authorize]
-public class UnityController(IUnityRepository unityRepository, GetUnityUseCase getUnityUseCase) : ControllerBase
+public class UnityController(IUnityRepository unityRepository, GetUnityUseCase getUnityUseCase, ImportPlaylistUseCase importPlaylistUseCase) : ControllerBase
 {
     [EndpointSummary("Obter lista")]
     [EndpointDescription("Retorna todas as unidades")]
@@ -36,6 +37,13 @@ public class UnityController(IUnityRepository unityRepository, GetUnityUseCase g
     {
         var publicUserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value!;
         var result = await getUnityUseCase.ExecuteAsync(unityName, Guid.Parse(publicUserId));
+        return StatusCode((int)result.StatusCode, result.Content);
+    }
+
+    [HttpGet("import/{playlistUrl}")]
+    public async Task<ActionResult> ImportFromYoutube(string playlistUrl)
+    {
+        var result = await importPlaylistUseCase.ExecuteAsync(playlistUrl);
         return StatusCode((int)result.StatusCode, result.Content);
     }
 }
