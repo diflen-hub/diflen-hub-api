@@ -10,7 +10,7 @@ insert into users(
 ) values (
     "33e5cabd-e14a-415a-b94d-421bead93a35",
     "prolud",
-    "$2a$11$uPn7itAIXQqxBhMeTq.1QeAD8RO70fVL9SGrGXR61v1KYJEd/VJ/G"
+    "$2a$11$DUhfwmZQryBVO42zkE2sWOUFJpyPWhqQbMVDWcUORl7EOSPLv3SQW"
 );
 
 insert into unities(public_id, name, description)
