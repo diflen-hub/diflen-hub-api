@@ -16,7 +16,7 @@ jobs:
       - run: dotnet publish -c Release -o ./publish
       - uses: ChristopheLav/iis-deploy@v1
         with:
-          server-url: https://site64701.siteasp.net:8172
+          deployUrl: https://site64701.siteasp.net:8172
           websiteName: site64701
           deployUserName: site64701
           deployUserPassword: 12345678
