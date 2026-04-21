@@ -5,10 +5,11 @@ create table users(
     public_id varchar(36) not null unique,
     username varchar(30) not null unique,
     password varchar(255) not null,
-    experience int default 0,
+    experience int not null default 0,
     status boolean default true,
     file_type varchar(30),
-    profile_picture blob
+    profile_picture blob,
+    role int not null default 0
 );
 
 create table unities(

@@ -6,11 +6,13 @@ use diflenhub;
 insert into users(
     public_id,
     username,
-    password
+    password,
+    role
 ) values (
     "33e5cabd-e14a-415a-b94d-421bead93a35",
     "prolud",
-    "$2a$11$DUhfwmZQryBVO42zkE2sWOUFJpyPWhqQbMVDWcUORl7EOSPLv3SQW"
+    "$2a$11$DUhfwmZQryBVO42zkE2sWOUFJpyPWhqQbMVDWcUORl7EOSPLv3SQW",
+    1
 );
 
 insert into unities(public_id, name, description)

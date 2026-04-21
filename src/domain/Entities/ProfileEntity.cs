@@ -1,3 +1,5 @@
+using domain.Enums;
+
 namespace Domain.Entities
 {
     public class ProfileEntity
@@ -11,6 +13,7 @@ namespace Domain.Entities
         public int RequiredExperienceToNextLevel => CalculateRequiredNextLevel(Experience);
         public int Level => CalculateLevel(Experience);
         public float LevelPercentage => CalculateLevelPercentage(Experience);
+        public Roles Role { get; set; }
 
         private int CalculateRequiredNextLevel(long experience)
         {

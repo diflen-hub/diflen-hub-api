@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using domain.Enums;
 
 namespace Domain.Models
 {
@@ -17,6 +18,8 @@ namespace Domain.Models
         public string? FileType { get; set; }
 
         [Column("profile_picture")]
-        public byte[]? ProfilePicture { get; set; } = [];
+        public byte[]? ProfilePicture { get; set; }
+
+        public Roles Role { get; set; }
     }
 }
