@@ -41,7 +41,7 @@ public class UnityController(IUnityRepository unityRepository, GetUnityUseCase g
         return StatusCode((int)result.StatusCode, result.Content);
     }
 
-    [HttpGet("import/{playlistUrl}")]
+    [HttpPost("import/{playlistUrl}")]
     public async Task<ActionResult> ImportFromYoutube(string playlistUrl)
     {
         var result = await importPlaylistUseCase.ExecuteAsync(playlistUrl);
