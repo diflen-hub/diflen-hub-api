@@ -39,3 +39,38 @@ jobs:
           msdeploy-username: ${{ secrets.SERVER_LOGIN }}
           msdeploy-password: ${{ secrets.SERVER_PASSWORD }}
           source-path: ./publish
+      - name: Restart AppPool
+        shell: pwsh
+        run: |
+          $serverHost = "${{ secrets.SERVER_HOST }}"
+          $serverLogin = "${{ secrets.SERVER_LOGIN }}"
+          $serverPassword = "${{ secrets.SERVER_PASSWORD }}"
+          $appPoolName = "site64868"
+
+          $secPassword = ConvertTo-SecureString $serverPassword -AsPlainText -Force
+          $credential = New-Object System.Management.Automation.PSCredential($serverLogin, $secPassword)
+
+          try {
+            $session = New-PSSession -ComputerName $serverHost -Credential $credential -UseSSL -SessionOption (New-PSSessionOption -SkipCACheck -SkipCNCheck)
+            Invoke-Command -Session $session -ScriptBlock {
+              param($poolName)
+              Import-Module WebAdministration
+              $pool = Get-WebAppPoolState -Name $poolName -ErrorAction SilentlyContinue
+              if ($pool) {
+                if ($pool.Value -eq "Stopped") {
+                  Start-WebAppPool -Name $poolName
+                  Write-Host "Started AppPool: $poolName"
+                } else {
+                  Restart-WebAppPool -Name $poolName
+                  Write-Host "Restarted AppPool: $poolName"
+                }
+              } else {
+                Write-Host "AppPool not found, attempting to enable via appcmd..."
+                & "C:\windows\system32\inetsrv\appcmd.exe" start apppool /apppool.name:$poolName
+              }
+            } -ArgumentList $appPoolName
+            Remove-PSSession $session
+          } catch {
+            Write-Host "Warning: Could not restart AppPool via WinRM. Error: $_"
+            Write-Host "AppPool may need manual restart from MonsterASP.NET panel"
+          }
