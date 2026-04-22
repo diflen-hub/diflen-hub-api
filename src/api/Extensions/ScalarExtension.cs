@@ -14,7 +14,7 @@ namespace API.Extensions
         {
             app.MapControllers();
             app.MapOpenApi();
-            app.MapScalarApiReference();
+            app.MapScalarApiReference("/");
         }
     }
 }
