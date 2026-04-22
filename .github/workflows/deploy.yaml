@@ -32,6 +32,21 @@ jobs:
           MYSQL_LOGIN: ${{ secrets.MYSQL_LOGIN }}
           MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
       - run: dotnet publish -c Release -o ./publish
+      - name: Force AppPool recycle by updating web.config
+        shell: pwsh
+        run: |
+          $webConfigPath = "./publish/web.config"
+          if (Test-Path $webConfigPath) {
+            $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+            $xml = [xml](Get-Content $webConfigPath)
+            # Add a comment with timestamp to force IIS to recycle the AppPool
+            $comment = $xml.CreateComment(" Last deployment: $timestamp ")
+            $xml.DocumentElement.AppendChild($comment) | Out-Null
+            $xml.Save($webConfigPath)
+            Write-Host "Updated web.config to trigger AppPool recycle"
+          } else {
+            Write-Host "web.config not found, skipping recycle trigger"
+          }
       - uses: ChristopheLav/iis-deploy@v1
         with:
           msdeploy-service-url: https://${{ secrets.SERVER_HOST }}:${{ secrets.SERVER_PORT }}
@@ -39,38 +54,3 @@ jobs:
           msdeploy-username: ${{ secrets.SERVER_LOGIN }}
           msdeploy-password: ${{ secrets.SERVER_PASSWORD }}
           source-path: ./publish
-      - name: Restart AppPool
-        shell: pwsh
-        run: |
-          $serverHost = "${{ secrets.SERVER_HOST }}"
-          $serverLogin = "${{ secrets.SERVER_LOGIN }}"
-          $serverPassword = "${{ secrets.SERVER_PASSWORD }}"
-          $appPoolName = "site64868"
-
-          $secPassword = ConvertTo-SecureString $serverPassword -AsPlainText -Force
-          $credential = New-Object System.Management.Automation.PSCredential($serverLogin, $secPassword)
-
-          try {
-            $session = New-PSSession -ComputerName $serverHost -Credential $credential -UseSSL -SessionOption (New-PSSessionOption -SkipCACheck -SkipCNCheck)
-            Invoke-Command -Session $session -ScriptBlock {
-              param($poolName)
-              Import-Module WebAdministration
-              $pool = Get-WebAppPoolState -Name $poolName -ErrorAction SilentlyContinue
-              if ($pool) {
-                if ($pool.Value -eq "Stopped") {
-                  Start-WebAppPool -Name $poolName
-                  Write-Host "Started AppPool: $poolName"
-                } else {
-                  Restart-WebAppPool -Name $poolName
-                  Write-Host "Restarted AppPool: $poolName"
-                }
-              } else {
-                Write-Host "AppPool not found, attempting to enable via appcmd..."
-                & "C:\windows\system32\inetsrv\appcmd.exe" start apppool /apppool.name:$poolName
-              }
-            } -ArgumentList $appPoolName
-            Remove-PSSession $session
-          } catch {
-            Write-Host "Warning: Could not restart AppPool via WinRM. Error: $_"
-            Write-Host "AppPool may need manual restart from MonsterASP.NET panel"
-          }
