@@ -20,6 +20,7 @@ namespace API.Middlewares
                 {
                     context.Response.StatusCode,
                     Message = $"Erro interno do servidor: {ex.Message}",
+                    Exception = ex
                 };
 
                 var options = new JsonSerializerOptions
