@@ -28,6 +28,7 @@ jobs:
         env:
           JWT_KEY: ${{ secrets.JWT_KEY }}
           MYSQL_HOST: ${{ secrets.MYSQL_HOST }}
+          MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
           MYSQL_LOGIN: ${{ secrets.MYSQL_LOGIN }}
           MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
       - run: dotnet publish -c Release -o ./publish
