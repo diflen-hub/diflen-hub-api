@@ -11,7 +11,11 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowNextJs",
         policy =>
         {
-            policy.WithOrigins("http://localhost:3000", "https://localhost:3000")
+            policy.WithOrigins(
+                    "http://localhost:3000",
+                    "https://localhost:3000",
+                    "http://diflenhub.runasp.net",
+                    "https://diflenhub.runasp.net")
                   .AllowAnyHeader()
                   .AllowAnyMethod();
         });
