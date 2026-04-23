@@ -7,50 +7,28 @@ on:
 
 jobs:
   deploy:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     environment: production
+    permissions:
+      contents: read
+      packages: write
+
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-dotnet@v3
+      - name: clone repository
+        uses: actions/checkout@v3
+
+      - name: login to ghcr
+        uses: docker/login-action@v3
         with:
-          dotnet-version: 10.0.x
-      - name: Update appsettings.json with environment variables
-        shell: pwsh
-        run: |
-          $filePath = "src/api/appsettings.json"
-          $content = Get-Content -Path $filePath -Raw
-          $content = $content -replace '__JWT_KEY__', $env:JWT_KEY
-          $content = $content -replace '__MYSQL_HOST__', $env:MYSQL_HOST
-          $content = $content -replace '__MYSQL_DATABASE__', $env:MYSQL_DATABASE
-          $content = $content -replace '__MYSQL_LOGIN__', $env:MYSQL_LOGIN
-          $content = $content -replace '__MYSQL_PASSWORD__', $env:MYSQL_PASSWORD
-          Set-Content -Path $filePath -Value $content
-        env:
-          JWT_KEY: ${{ secrets.JWT_KEY }}
-          MYSQL_HOST: ${{ secrets.MYSQL_HOST }}
-          MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
-          MYSQL_LOGIN: ${{ secrets.MYSQL_LOGIN }}
-          MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
-      - run: dotnet publish -c Release -o ./publish
-      - name: Force AppPool recycle by updating web.config
-        shell: pwsh
-        run: |
-          $webConfigPath = "./publish/web.config"
-          if (Test-Path $webConfigPath) {
-            $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-            $xml = [xml](Get-Content $webConfigPath)
-            # Add a comment with timestamp to force IIS to recycle the AppPool
-            $comment = $xml.CreateComment(" Last deployment: $timestamp ")
-            $xml.DocumentElement.AppendChild($comment) | Out-Null
-            $xml.Save($webConfigPath)
-            Write-Host "Updated web.config to trigger AppPool recycle"
-          } else {
-            Write-Host "web.config not found, skipping recycle trigger"
-          }
-      - uses: ChristopheLav/iis-deploy@v1
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: build and push docker image
+        uses: docker/build-push-action@v5
         with:
-          msdeploy-service-url: https://${{ secrets.SERVER_HOST }}:${{ secrets.SERVER_PORT }}
-          website-name: ${{ secrets.SERVER_SITE }}
-          msdeploy-username: ${{ secrets.SERVER_LOGIN }}
-          msdeploy-password: ${{ secrets.SERVER_PASSWORD }}
-          source-path: ./publish
+          context: .
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}:latest
+            ghcr.io/${{ github.repository }}:${{ github.sha }}
