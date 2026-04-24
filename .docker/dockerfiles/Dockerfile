@@ -15,8 +15,16 @@ RUN dotnet publish src/api/api.csproj -c Release -o /app/publish
 FROM mcr.microsoft.com/dotnet/aspnet:10.0
 WORKDIR /app
 
-# Install curl for health checks (optional)
-RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
+# Install Chrome and dependencies for Selenium
+RUN apt-get update && apt-get install -y \
+    curl \
+    wget \
+    gnupg \
+    --no-install-recommends \
+  && wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor -o /usr/share/keyrings/google-chrome.gpg \
+  && echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list \
+  && apt-get update && apt-get install -y google-chrome-stable --no-install-recommends \
+  && rm -rf /var/lib/apt/lists/*
 
 # Copy published app from builder
 COPY --from=builder /app/publish .
