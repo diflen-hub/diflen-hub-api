@@ -33,3 +33,6 @@ jobs:
           tags: |
             ghcr.io/${{ github.repository }}:latest
             ghcr.io/${{ github.repository }}:${{ github.sha }}
+
+      - name: trigger deploy at render
+        run: curl -X POST "${{ secrets.DEPLOY_HOOK_URL }}"
