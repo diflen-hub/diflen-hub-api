@@ -99,11 +99,10 @@ insert into users(
     1
 );
 
-insert into unities(public_id, name, description)
+insert into unities(public_id, name)
 values(
     "613c10a9-7f33-453b-a704-56a85679727b",
-    "O Poder do Amor",
-    "Descubra “O Poder do Amor” através de uma série inspiradora. [...]."
+    "Teologias Perigosas"
 );
 
 insert into lessons(public_id, title, description, sequence, video_url, unity_id)
