@@ -4,7 +4,7 @@ namespace Domain.Dtos
     {
         public List<AnswerVerifyOut> Answers { get; set; } = [];
         public int CurrentPointsWeight { get; set; }
-        public bool WasAllQuestionsCorrectlyAnswered { get; set; }
+        public bool WasAllQuestionsFromLessonCorrectlyAnswered { get; set; }
         public bool WasCertificateAlreadyIssued { get; set; }
         public string? Message { get; set; }
     }

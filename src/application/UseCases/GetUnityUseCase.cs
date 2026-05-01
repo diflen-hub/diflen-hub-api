@@ -22,7 +22,7 @@ namespace Application.UseCases
                     Description = unity.Description,
                     Name = unity.Name,
                     WasCertificateAlreadyIssued = certificate is not null,
-                    WasAllQuestionsCorrectlyAnswered = await questionService.WasAllQuestionsCorrectlyAnswered(unity.PublicId, publicUserId)
+                    WasAllQuestionsFromUnityCorrectlyAnswered = await questionService.WasAllQuestionsCorrectlyAnswered(unity.PublicId, publicUserId)
                 }
             };
         }
