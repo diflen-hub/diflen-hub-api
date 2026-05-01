@@ -27,20 +27,20 @@ namespace Infra.Services
                 .ToListAsync();
         }
 
-        public async Task<GetLastAnswersOut> GetLastAnswersAsync(Guid publicUserId, Guid publicLessonId)
+        public async Task<GetLastAnswersResponse> GetLastAnswersAsync(Guid publicUserId, Guid publicLessonId)
         {
             var userAnswers = await GetAnswersByUserAndLesson(publicUserId, publicLessonId);
 
             var answers = GetAnswerVerifyOuts(userAnswers);
 
-            return new GetLastAnswersOut
+            return new GetLastAnswersResponse
             {
                 Answers = answers,
                 CurrentPointsWeight = CalculatePoints(userAnswers)
             };
         }
 
-        public async Task<GetLastAnswersOut?> VerifyAnswersAsync(Guid publicLessonId, string unityName, List<PublicAnswerDto> answers, Guid publicUserId, Guid publicUnityId)
+        public async Task<GetLastAnswersResponse?> VerifyAnswersAsync(Guid publicLessonId, string unityName, List<PublicAnswerDto> answers, Guid publicUserId, Guid publicUnityId)
         {
             var answersToInsert = new List<Answer>();
             var user = await _userRepository.GetAsyncNotNull(user => user.PublicId == publicUserId);

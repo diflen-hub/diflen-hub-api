@@ -9,7 +9,7 @@ namespace Application.UseCases
 {
     public class VerifyAnswersUseCase(IUnityRepository unityRepository, ILessonService lessonService, IAnswerService answerService, IQuestionService questionService, ICertificateRepository _certificateRepository)
     {
-        public async Task<UseCaseResult<GetLastAnswersOut>> ExecuteAsync(Guid publicLessonId, string unityName, List<PublicAnswerDto> answers, Guid publicUserId)
+        public async Task<UseCaseResult<GetLastAnswersResponse>> ExecuteAsync(Guid publicLessonId, string unityName, List<PublicAnswerDto> answers, Guid publicUserId)
         {
             var unity = await unityRepository.GetAsync(u => u.Name == unityName);
             if (unity is null)
