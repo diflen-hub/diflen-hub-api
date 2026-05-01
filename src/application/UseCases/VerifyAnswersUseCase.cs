@@ -40,7 +40,8 @@ namespace Application.UseCases
                 };
             }
 
-            verifiedAnswers.WasAllQuestionsFromLessonCorrectlyAnswered = await questionService.WasAllQuestionsCorrectlyAnswered(unity.PublicId, publicUserId);
+            verifiedAnswers.WasLessonCorrectlyAnswered = !verifiedAnswers.Answers.Any(a => !a.IsCorrect);
+            verifiedAnswers.WasUnityCorrectlyAnswered = await questionService.WasUnityCorrectlyAnswered(unity.PublicId, publicUserId);
             verifiedAnswers.WasCertificateAlreadyIssued = await _certificateRepository.GetAsync(c => c.User!.PublicId == publicUserId && c.Unity!.PublicId == unity.PublicId) is not null;
 
             return new()

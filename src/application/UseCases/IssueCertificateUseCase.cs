@@ -35,7 +35,7 @@ namespace Application.UseCases
                 };
             }
 
-            if (await questionService.WasAllQuestionsCorrectlyAnswered(publicUserId, unity.PublicId))
+            if (await questionService.WasUnityCorrectlyAnswered(unity.PublicId, publicUserId))
             {
                 var certificate = new Certificate
                 {

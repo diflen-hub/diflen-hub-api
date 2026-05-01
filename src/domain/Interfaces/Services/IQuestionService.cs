@@ -2,6 +2,6 @@ namespace Domain.Interfaces.Services
 {
     public interface IQuestionService
     {
-        Task<bool> WasAllQuestionsCorrectlyAnswered(Guid publicUnityId, Guid publicUserId);
+        Task<bool> WasUnityCorrectlyAnswered(Guid publicUnityId, Guid publicUserId);
     }
 }
