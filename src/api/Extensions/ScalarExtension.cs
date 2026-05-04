@@ -1,6 +1,6 @@
 using Scalar.AspNetCore;
 
-namespace API.Extensions
+namespace api.Extensions
 {
     public static class ScalarExtension
     {

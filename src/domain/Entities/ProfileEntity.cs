@@ -1,6 +1,6 @@
 using domain.Enums;
 
-namespace Domain.Entities
+namespace domain.Entities
 {
     public class ProfileEntity
     {

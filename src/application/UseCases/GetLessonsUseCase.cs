@@ -1,8 +1,8 @@
-using Application.Dtos;
-using Domain.Interfaces.Repositories;
-using Domain.Interfaces.Services;
+using application.Dtos;
+using domain.Interfaces.Repositories;
+using domain.Interfaces.Services;
 
-namespace Application.UseCases
+namespace application.UseCases
 {
     public class GetLessonsUseCase(IUnityRepository unityRepository, ILessonRepository lessonRepository, ILessonService lessonService)
     {

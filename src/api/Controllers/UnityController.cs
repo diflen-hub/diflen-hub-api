@@ -1,13 +1,12 @@
 using System.Security.Claims;
 using api.Controllers.Responses;
 using application.UseCases;
-using Application.Dtos;
-using Application.UseCases;
-using Domain.Interfaces.Repositories;
+using application.Dtos;
+using domain.Interfaces.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace API.Controllers;
+namespace api.Controllers;
 
 [Route("api/unity")]
 [ApiController]

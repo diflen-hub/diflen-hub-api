@@ -1,12 +1,12 @@
 using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 using api.Controllers.Responses;
-using Application.UseCases;
-using Domain.Interfaces.Repositories;
+using application.UseCases;
+using domain.Interfaces.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace API.Controllers
+namespace api.Controllers
 {
     [Route("api/certificate")]
     [ApiController]

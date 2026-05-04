@@ -1,6 +1,6 @@
-using Domain.Interfaces.Services;
+using domain.Interfaces.Services;
 
-namespace Infra.Services
+namespace infra.Services
 {
     public class LessonService(IAnswerService answerService) : ILessonService
     {

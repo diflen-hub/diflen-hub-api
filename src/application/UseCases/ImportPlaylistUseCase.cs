@@ -1,7 +1,7 @@
-using Application.Dtos;
+using application.Dtos;
 using domain.Interfaces.Services;
-using Domain.Interfaces.Repositories;
-using Domain.Models;
+using domain.Interfaces.Repositories;
+using domain.Models;
 
 namespace application.UseCases
 {

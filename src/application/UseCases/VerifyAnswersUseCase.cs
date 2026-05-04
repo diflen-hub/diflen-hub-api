@@ -1,11 +1,11 @@
 using System.Net;
-using Application.Dtos;
+using application.Dtos;
 using domain.Dtos.Publics;
-using Domain.Dtos;
-using Domain.Interfaces.Repositories;
-using Domain.Interfaces.Services;
+using domain.Dtos;
+using domain.Interfaces.Repositories;
+using domain.Interfaces.Services;
 
-namespace Application.UseCases
+namespace application.UseCases
 {
     public class VerifyAnswersUseCase(IUnityRepository unityRepository, ILessonService lessonService, IAnswerService answerService, IQuestionService questionService, ICertificateRepository _certificateRepository)
     {

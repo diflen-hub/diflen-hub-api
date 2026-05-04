@@ -1,6 +1,6 @@
-using Domain.Models;
+using domain.Models;
 
-namespace Domain.Interfaces.Repositories
+namespace domain.Interfaces.Repositories
 {
     public interface IQuestionRepository : IBaseRepository<Question>
     {

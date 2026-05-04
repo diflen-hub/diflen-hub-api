@@ -1,11 +1,11 @@
 using domain.Dtos.Publics;
-using Domain.Dtos;
-using Domain.Interfaces.Repositories;
-using Domain.Interfaces.Services;
-using Domain.Models;
+using domain.Dtos;
+using domain.Interfaces.Repositories;
+using domain.Interfaces.Services;
+using domain.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infra.Services
+namespace infra.Services
 {
     public class AnswerService(
         AppDbContext _context,

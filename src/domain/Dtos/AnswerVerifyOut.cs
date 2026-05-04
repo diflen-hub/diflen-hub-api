@@ -1,4 +1,4 @@
-namespace Domain.Dtos
+namespace domain.Dtos
 {
     public class AnswerVerifyOut
     {

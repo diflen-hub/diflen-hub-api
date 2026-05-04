@@ -1,6 +1,6 @@
-using Application.Dtos;
-using Domain.Dtos;
-using Domain.Interfaces.Repositories;
+using application.Dtos;
+using domain.Dtos;
+using domain.Interfaces.Repositories;
 
 namespace application.UseCases
 {

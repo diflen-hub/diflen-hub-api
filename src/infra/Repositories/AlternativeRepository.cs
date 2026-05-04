@@ -1,7 +1,7 @@
-using Domain.Interfaces.Repositories;
-using Domain.Models;
+using domain.Interfaces.Repositories;
+using domain.Models;
 
-namespace Infra.Repositories
+namespace infra.Repositories
 {
     public class AlternativeRepository(AppDbContext context) : BaseRepository<Alternative>(context), IAlternativeRepository { }
 }

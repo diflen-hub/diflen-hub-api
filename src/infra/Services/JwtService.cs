@@ -1,12 +1,12 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Domain.Interfaces.Services;
-using Domain.Models;
+using domain.Interfaces.Services;
+using domain.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Infra.Services
+namespace infra.Services
 {
     public class JwtService(IConfiguration _configuration) : IJwtService
     {

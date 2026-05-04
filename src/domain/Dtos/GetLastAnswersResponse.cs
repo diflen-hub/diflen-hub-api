@@ -1,6 +1,6 @@
 using System.ComponentModel;
 
-namespace Domain.Dtos
+namespace domain.Dtos
 {
     public class GetLastAnswersResponse
     {

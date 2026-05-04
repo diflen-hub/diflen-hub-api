@@ -2,13 +2,13 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using api.Controllers.Requests;
 using application.Dtos;
-using Application.UseCases;
-using Domain.Entities;
-using Domain.Interfaces.Repositories;
+using application.UseCases;
+using domain.Entities;
+using domain.Interfaces.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using static System.Text.Encoding;
 
-namespace API.Controllers
+namespace api.Controllers
 {
     [Route("api/user")]
     [ApiController]

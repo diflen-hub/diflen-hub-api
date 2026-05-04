@@ -1,12 +1,11 @@
 using System.Security.Claims;
 using api.Controllers.Requests;
 using application.UseCases;
-using Application.UseCases;
-using Domain.Dtos;
+using domain.Dtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace API.Controllers
+namespace api.Controllers
 {
     [Route("api/questionnaire")]
     [ApiController]

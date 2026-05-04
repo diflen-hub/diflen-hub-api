@@ -1,7 +1,7 @@
 using domain.Dtos.Publics;
-using Domain.Dtos;
+using domain.Dtos;
 
-namespace Domain.Interfaces.Services
+namespace domain.Interfaces.Services
 {
     public interface IAnswerService
     {

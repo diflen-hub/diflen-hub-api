@@ -1,7 +1,7 @@
-using Domain.Interfaces.Repositories;
-using Domain.Interfaces.Services;
+using domain.Interfaces.Repositories;
+using domain.Interfaces.Services;
 
-namespace Infra.Services
+namespace infra.Services
 {
     public class QuestionService(IQuestionRepository questionRepository, IAnswerRepository answerRepository) : IQuestionService
     {

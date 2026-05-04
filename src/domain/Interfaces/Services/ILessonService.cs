@@ -1,4 +1,4 @@
-namespace Domain.Interfaces.Services;
+namespace domain.Interfaces.Services;
 
 public interface ILessonService
 {

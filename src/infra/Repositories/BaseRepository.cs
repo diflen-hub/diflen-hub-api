@@ -1,9 +1,9 @@
-using Domain.Interfaces.Repositories;
+using domain.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
 using System.Linq.Expressions;
 
-namespace Infra.Repositories
+namespace infra.Repositories
 {
     public class BaseRepository<T>(DbContext context) : IBaseRepository<T> where T : class
     {

@@ -1,4 +1,4 @@
-namespace Application.Dtos
+namespace application.Dtos
 {
     public class UnityResponseDto
     {

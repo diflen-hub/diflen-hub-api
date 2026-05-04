@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using domain.Enums;
 
-namespace Domain.Models
+namespace domain.Models
 {
     [Table("users")]
     public class User : BaseEntity
