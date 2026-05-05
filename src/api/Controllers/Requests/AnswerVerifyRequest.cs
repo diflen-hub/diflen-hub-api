@@ -3,7 +3,7 @@ using System.Web;
 
 namespace api.Controllers.Requests
 {
-    public class AnswerVerifyRequestDto
+    public class AnswerVerifyRequest
     {
         public Guid PublicLessonId { get; set; }
         public required string UnityName

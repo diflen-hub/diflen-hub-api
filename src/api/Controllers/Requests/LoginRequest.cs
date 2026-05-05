@@ -3,13 +3,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace api.Controllers.Requests
 {
-    public class RegisterRequestDto
+    public class LoginRequest
     {
-        [Description("Nome de usuário, nickname")]
+
+        [Description("Nome de usuário")]
         [Required]
         public required string Username { get; set; }
-        
-        [Description("Senha que será utilizada no login")]
+
+        [Description("Senha previamente criada através do endpoint `api/user/register`.")]
         [Required]
         public required string Password { get; set; }
     }
