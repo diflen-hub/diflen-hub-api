@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace infra.Repositories
 {
-    public class LessonRepository(AppDbContext context) : BaseRepository<Lesson>(context), ILessonRepository
+    internal class LessonRepository(AppDbContext context) : BaseRepository<Lesson>(context), ILessonRepository
     {
         public async Task<Lesson?> GetLesson(Guid publicId)
         {

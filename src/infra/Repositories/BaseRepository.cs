@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace infra.Repositories
 {
-    public class BaseRepository<T>(DbContext context) : IBaseRepository<T> where T : class
+    internal class BaseRepository<T>(DbContext context) : IBaseRepository<T> where T : class
     {
         protected readonly DbContext _context = context;
         protected readonly DbSet<T> _dbSet = context.Set<T>();

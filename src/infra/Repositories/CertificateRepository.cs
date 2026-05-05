@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace infra.Repositories
 {
-    public class CertificateRepository(AppDbContext context) : BaseRepository<Certificate>(context), ICertificateRepository
+    internal class CertificateRepository(AppDbContext context) : BaseRepository<Certificate>(context), ICertificateRepository
     {
         public async Task<List<Certificate>> GetCertificatesByUserId(Guid publicUserId)
         {

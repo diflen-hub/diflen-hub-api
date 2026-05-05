@@ -3,5 +3,5 @@ using domain.Models;
 
 namespace infra.Repositories
 {
-    public class UnityRepository(AppDbContext context) : BaseRepository<Unity>(context), IUnityRepository { }
+    internal class UnityRepository(AppDbContext context) : BaseRepository<Unity>(context), IUnityRepository { }
 }

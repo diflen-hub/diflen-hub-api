@@ -3,5 +3,5 @@ using domain.Models;
 
 namespace infra.Repositories
 {
-    public class AnswerRepository(AppDbContext context) : BaseRepository<Answer>(context), IAnswerRepository { }
+    internal class AnswerRepository(AppDbContext context) : BaseRepository<Answer>(context), IAnswerRepository { }
 }
