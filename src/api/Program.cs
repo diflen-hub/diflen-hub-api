@@ -6,6 +6,8 @@ using API.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.AddOpenTelemetryExtension();
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowNextJs",
