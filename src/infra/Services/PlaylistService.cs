@@ -26,7 +26,7 @@ namespace infra.Services
             _wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(15));
         }
 
-        public Playlist ScrapVideos(string playlistUrl)
+        public YoutubePlaylist ScrapVideos(string playlistUrl)
         {
             var playlist = ScrapPlaylist(playlistUrl);
 
@@ -53,7 +53,7 @@ namespace infra.Services
                 descAccordion!.Click();
 
                 var descEls = _driver.FindElements(By.XPath("//*[@id='expanded']/yt-attributed-string/span/span[1]"));
-                return new Playlist.Video
+                return new YoutubePlaylist.Video
                 {
                     Url = url,
                     Title = GetVideoTitle(),
@@ -101,7 +101,7 @@ namespace infra.Services
             }
         }
 
-        private Playlist ScrapPlaylist(string playlistUrl)
+        private YoutubePlaylist ScrapPlaylist(string playlistUrl)
         {
             playlistUrl = Uri.UnescapeDataString(playlistUrl);
             _driver.Navigate().GoToUrl(playlistUrl);
