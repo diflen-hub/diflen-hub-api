@@ -13,7 +13,7 @@ namespace API.Controllers
     [Route("api/user")]
     [ApiController]
     public class UsersController(IUserRepository userRepository, LoginUseCase loginUseCase, RegisterUseCase _useCase) : ControllerBase
-    {
+    {   
         [EndpointSummary("Registro")]
         [EndpointDescription("Cria um novo usuário.")]
         [ProducesResponseType<string>(StatusCodes.Status201Created)]
