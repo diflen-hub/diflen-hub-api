@@ -47,6 +47,6 @@ app.UseMiddleware<ApiMiddleware>();
 app.UseScalar();
 app.UseJwt();
 
-app.MapGet("/health", () => "OK!");
+app.MapGet("/healthcheck", () => "OK!");
 
 await app.RunAsync();
