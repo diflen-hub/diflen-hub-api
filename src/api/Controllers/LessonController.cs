@@ -1,12 +1,12 @@
 using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 using api.Controllers.Responses;
-using Application.Dtos;
-using Application.UseCases;
+using application.Dtos;
+using application.UseCases;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace API.Controllers
+namespace api.Controllers
 {
     [Route("api/lesson")]
     [ApiController]

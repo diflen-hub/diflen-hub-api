@@ -1,9 +1,9 @@
 using System.Net;
-using Application.Dtos;
-using Domain.Interfaces.Repositories;
-using Domain.Interfaces.Services;
+using application.Dtos;
+using domain.Interfaces.Repositories;
+using domain.Interfaces.Services;
 
-namespace Application.UseCases
+namespace application.UseCases
 {
     public class GetUnityUseCase(IUnityRepository unityRepository, ICertificateRepository certificateRepository, IQuestionService questionService)
     {
@@ -22,7 +22,7 @@ namespace Application.UseCases
                     Description = unity.Description,
                     Name = unity.Name,
                     WasCertificateAlreadyIssued = certificate is not null,
-                    WasAllQuestionsFromUnityCorrectlyAnswered = await questionService.WasAllQuestionsCorrectlyAnswered(unity.PublicId, publicUserId)
+                    WasUnityCorrectlyAnswered = await questionService.WasUnityCorrectlyAnswered(unity.PublicId, publicUserId)
                 }
             };
         }

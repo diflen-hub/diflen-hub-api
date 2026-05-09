@@ -1,10 +1,10 @@
-using Domain.Interfaces.Repositories;
-using Domain.Models;
+using domain.Interfaces.Repositories;
+using domain.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infra.Repositories
+namespace infra.Repositories
 {
-    public class QuestionRepository(AppDbContext context) : BaseRepository<Question>(context), IQuestionRepository
+    internal class QuestionRepository(AppDbContext context) : BaseRepository<Question>(context), IQuestionRepository
     {
         public async Task<IEnumerable<Question>> GetListAsync(int lessonId)
         {

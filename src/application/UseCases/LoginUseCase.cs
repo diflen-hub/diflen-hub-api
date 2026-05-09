@@ -1,11 +1,10 @@
 using System.Net;
 using application.Dtos;
-using Application.Dtos;
-using Domain.Interfaces.Repositories;
-using Domain.Interfaces.Services;
+using domain.Interfaces.Repositories;
+using domain.Interfaces.Services;
 using static BCrypt.Net.BCrypt;
 
-namespace Application.UseCases
+namespace application.UseCases
 {
     public class LoginUseCase(IUserRepository userRepository, IJwtService jwtService)
     {

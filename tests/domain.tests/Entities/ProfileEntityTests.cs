@@ -1,4 +1,4 @@
-using Domain.Entities;
+using domain.Entities;
 using domain.Enums;
 
 namespace domain.tests.Entities;

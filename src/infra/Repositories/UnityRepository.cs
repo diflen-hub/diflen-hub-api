@@ -1,7 +1,7 @@
-using Domain.Interfaces.Repositories;
-using Domain.Models;
+using domain.Interfaces.Repositories;
+using domain.Models;
 
-namespace Infra.Repositories
+namespace infra.Repositories
 {
-    public class UnityRepository(AppDbContext context) : BaseRepository<Unity>(context), IUnityRepository { }
+    internal class UnityRepository(AppDbContext context) : BaseRepository<Unity>(context), IUnityRepository { }
 }

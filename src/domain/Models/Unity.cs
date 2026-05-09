@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Domain.Models
+namespace domain.Models
 {
     [Table("unities")]
     public class Unity : BaseEntity

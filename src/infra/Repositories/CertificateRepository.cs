@@ -1,10 +1,10 @@
-using Domain.Interfaces.Repositories;
-using Domain.Models;
+using domain.Interfaces.Repositories;
+using domain.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infra.Repositories
+namespace infra.Repositories
 {
-    public class CertificateRepository(AppDbContext context) : BaseRepository<Certificate>(context), ICertificateRepository
+    internal class CertificateRepository(AppDbContext context) : BaseRepository<Certificate>(context), ICertificateRepository
     {
         public async Task<List<Certificate>> GetCertificatesByUserId(Guid publicUserId)
         {

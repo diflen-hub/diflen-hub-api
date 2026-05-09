@@ -1,10 +1,10 @@
 using System.Net;
-using Application.Dtos;
-using Domain.Interfaces.Repositories;
-using Domain.Models;
+using application.Dtos;
+using domain.Interfaces.Repositories;
+using domain.Models;
 using static BCrypt.Net.BCrypt;
 
-namespace Application.UseCases
+namespace application.UseCases
 {
     public class RegisterUseCase(IUserRepository userRepository)
     {

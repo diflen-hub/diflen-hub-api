@@ -1,5 +1,4 @@
 using application.UseCases;
-using Application.UseCases;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace application.Config

@@ -1,4 +1,4 @@
-# DifLen Hub API
+# Diflen Hub API
 
 REST API for a YouTube-based online learning platform. Course content is sourced directly from YouTube playlists, which are imported and organized into learning units. The API provides lesson management, user progress tracking, quizzes, and certificate issuance.
 

@@ -1,8 +1,8 @@
-﻿using Domain.Models;
+﻿using domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-namespace Infra
+namespace infra
 {
     public class AppDbContext(IConfiguration _configuration) : DbContext
     {

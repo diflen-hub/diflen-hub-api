@@ -1,8 +1,7 @@
-using API.Extensions;
+using api.Extensions;
 using infra.Config;
 using application.Config;
-using api.Extensions;
-using API.Middlewares;
+using api.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 

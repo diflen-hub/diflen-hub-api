@@ -1,7 +1,7 @@
 using System.ComponentModel;
 using System.Net;
 
-namespace Application.Dtos
+namespace application.Dtos
 {
     [Description("Objeto padrão retornado por todos os endpoints")]
     public class UseCaseResult<T>

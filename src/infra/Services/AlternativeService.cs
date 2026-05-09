@@ -1,8 +1,8 @@
-using Domain.Interfaces.Services;
-using Domain.Models;
+using domain.Interfaces.Services;
+using domain.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infra.Services
+namespace infra.Services
 {
     public class AlternativeService(AppDbContext _context) : IAlternativeService
     {

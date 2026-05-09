@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Text.Json;
 
-namespace API.Middlewares
+namespace api.Middlewares
 {
     public class ApiMiddleware(RequestDelegate _next)
     {

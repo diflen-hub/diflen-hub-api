@@ -1,10 +1,7 @@
 using domain.Interfaces.Services;
-using Domain.Interfaces.Repositories;
-using Domain.Interfaces.Services;
+using domain.Interfaces.Repositories;
+using infra.Repositories;
 using infra.Services;
-using Infra;
-using Infra.Repositories;
-using Infra.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace infra.Config

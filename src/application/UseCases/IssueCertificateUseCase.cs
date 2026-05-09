@@ -1,10 +1,10 @@
 using System.Net;
-using Application.Dtos;
-using Domain.Interfaces.Repositories;
-using Domain.Interfaces.Services;
-using Domain.Models;
+using application.Dtos;
+using domain.Interfaces.Repositories;
+using domain.Interfaces.Services;
+using domain.Models;
 
-namespace Application.UseCases
+namespace application.UseCases
 {
     public class IssueCertificateUseCase(
         IQuestionService questionService,
@@ -35,7 +35,7 @@ namespace Application.UseCases
                 };
             }
 
-            if (await questionService.WasAllQuestionsCorrectlyAnswered(publicUserId, unity.PublicId))
+            if (await questionService.WasUnityCorrectlyAnswered(unity.PublicId, publicUserId))
             {
                 var certificate = new Certificate
                 {

@@ -1,6 +1,6 @@
-using Domain.Models;
+using domain.Models;
 
-namespace Domain.Interfaces.Services
+namespace domain.Interfaces.Services
 {
     public interface IAlternativeService
     {

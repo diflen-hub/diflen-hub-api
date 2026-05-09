@@ -1,10 +1,10 @@
-using Domain.Interfaces.Repositories;
-using Domain.Models;
+using domain.Interfaces.Repositories;
+using domain.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infra.Repositories
+namespace infra.Repositories
 {
-    public class LessonRepository(AppDbContext context) : BaseRepository<Lesson>(context), ILessonRepository
+    internal class LessonRepository(AppDbContext context) : BaseRepository<Lesson>(context), ILessonRepository
     {
         public async Task<Lesson?> GetLesson(Guid publicId)
         {

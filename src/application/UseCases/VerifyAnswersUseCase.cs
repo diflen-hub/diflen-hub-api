@@ -1,15 +1,15 @@
 using System.Net;
-using Application.Dtos;
+using application.Dtos;
 using domain.Dtos.Publics;
-using Domain.Dtos;
-using Domain.Interfaces.Repositories;
-using Domain.Interfaces.Services;
+using domain.Dtos;
+using domain.Interfaces.Repositories;
+using domain.Interfaces.Services;
 
-namespace Application.UseCases
+namespace application.UseCases
 {
     public class VerifyAnswersUseCase(IUnityRepository unityRepository, ILessonService lessonService, IAnswerService answerService, IQuestionService questionService, ICertificateRepository _certificateRepository)
     {
-        public async Task<UseCaseResult<GetLastAnswersOut>> ExecuteAsync(Guid publicLessonId, string unityName, List<PublicAnswerDto> answers, Guid publicUserId)
+        public async Task<UseCaseResult<GetLastAnswersResponse>> ExecuteAsync(Guid publicLessonId, string unityName, List<PublicAnswerDto> answers, Guid publicUserId)
         {
             var unity = await unityRepository.GetAsync(u => u.Name == unityName);
             if (unity is null)
@@ -40,7 +40,8 @@ namespace Application.UseCases
                 };
             }
 
-            verifiedAnswers.WasAllQuestionsFromLessonCorrectlyAnswered = await questionService.WasAllQuestionsCorrectlyAnswered(unity.PublicId, publicUserId);
+            verifiedAnswers.WasLessonCorrectlyAnswered = !verifiedAnswers.Answers.Any(a => !a.IsCorrect);
+            verifiedAnswers.WasUnityCorrectlyAnswered = await questionService.WasUnityCorrectlyAnswered(unity.PublicId, publicUserId);
             verifiedAnswers.WasCertificateAlreadyIssued = await _certificateRepository.GetAsync(c => c.User!.PublicId == publicUserId && c.Unity!.PublicId == unity.PublicId) is not null;
 
             return new()
