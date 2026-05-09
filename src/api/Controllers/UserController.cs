@@ -42,7 +42,6 @@ namespace api.Controllers
         [HttpGet("{username}")]
         public async Task<ActionResult<Profile>> Profile([FromRoute][Required][Description("Nome de usuário que deseja buscar.")] string username)
         {
-            _logger.LogError("DEU CERTO!");
             var user = await userRepository.GetAsync(u => u.Username == username);
 
             if (user is null) return NoContent();
