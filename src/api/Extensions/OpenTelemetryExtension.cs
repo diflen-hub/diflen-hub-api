@@ -41,7 +41,8 @@ namespace api.Extensions
                         .SetResourceBuilder(resource)
                         .AddAspNetCoreInstrumentation()
                         .AddHttpClientInstrumentation()
-                        .AddOtlpExporter(ConfigureOtlp($"{baseEndpoint}/v1/traces", configuration));
+                        .AddOtlpExporter(ConfigureOtlp($"{baseEndpoint}/v1/traces", configuration))
+                        .AddEntityFrameworkCoreInstrumentation();
                 }).WithMetrics(options =>
                 {
                     options
