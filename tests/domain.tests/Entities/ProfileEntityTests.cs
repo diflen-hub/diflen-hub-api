@@ -5,7 +5,7 @@ namespace domain.tests.Entities;
 
 public class ProfileEntityTests
 {
-    private static ProfileEntity BuildProfile(long experience) => new()
+    private static Profile BuildProfile(long experience) => new()
     {
         PublicId = Guid.NewGuid(),
         Username = "test",
@@ -78,14 +78,14 @@ public class ProfileEntityTests
     [Fact]
     public void Role_DefaultsToUser()
     {
-        var profile = new ProfileEntity();
+        var profile = new Profile();
         Assert.Equal(Roles.User, profile.Role);
     }
 
     [Fact]
     public void Role_CanBeSetToAdmin()
     {
-        var profile = new ProfileEntity { Role = Roles.Admin };
+        var profile = new Profile { Role = Roles.Admin };
         Assert.Equal(Roles.Admin, profile.Role);
     }
 }

@@ -2,7 +2,7 @@ using domain.Enums;
 
 namespace domain.Entities
 {
-    public class ProfileEntity
+    public class Profile
     {
         private readonly int LevelMultiplier = 75;
 

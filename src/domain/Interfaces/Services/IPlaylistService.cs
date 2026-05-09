@@ -4,6 +4,6 @@ namespace domain.Interfaces.Services
 {
     public interface IPlaylistService
     {
-        public Playlist ScrapVideos(string playlistUrl);
+        public YoutubePlaylist ScrapVideos(string playlistUrl);
     }
 }

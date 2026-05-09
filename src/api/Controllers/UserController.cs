@@ -12,8 +12,8 @@ namespace api.Controllers
 {
     [Route("api/user")]
     [ApiController]
-    public class UsersController(ILogger<UsersController> _logger, IUserRepository userRepository, LoginUseCase loginUseCase, RegisterUseCase _useCase) : ControllerBase
-    {
+    public class UsersController(IUserRepository userRepository, LoginUseCase loginUseCase, RegisterUseCase _useCase) : ControllerBase
+    {   
         [EndpointSummary("Registro")]
         [EndpointDescription("Cria um novo usuário.")]
         [ProducesResponseType<string>(StatusCodes.Status201Created)]
@@ -37,17 +37,16 @@ namespace api.Controllers
 
         [EndpointSummary("Obter perfil")]
         [EndpointDescription("Retorna os dados públicos de qualquer usuário solicitado.")]
-        [ProducesResponseType<ProfileEntity>(StatusCodes.Status200OK, Description = "Quando o usuário é encontrado.")]
+        [ProducesResponseType<Profile>(StatusCodes.Status200OK, Description = "Quando o usuário é encontrado.")]
         [ProducesResponseType(StatusCodes.Status204NoContent, Description = "Quando o usuário não é encontrado.")]
         [HttpGet("{username}")]
-        public async Task<ActionResult<ProfileEntity>> Profile([FromRoute][Required][Description("Nome de usuário que deseja buscar.")] string username)
+        public async Task<ActionResult<Profile>> Profile([FromRoute][Required][Description("Nome de usuário que deseja buscar.")] string username)
         {
-            _logger.LogError("DEU CERTO!");
             var user = await userRepository.GetAsync(u => u.Username == username);
 
             if (user is null) return NoContent();
 
-            return Ok(new ProfileEntity
+            return Ok(new Profile
             {
                 PublicId = user.PublicId,
                 Experience = user.Experience,
@@ -58,3 +57,4 @@ namespace api.Controllers
         }
     }
 }
+

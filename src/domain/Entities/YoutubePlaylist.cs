@@ -1,6 +1,6 @@
 namespace domain.Entities
 {
-    public class Playlist
+    public class YoutubePlaylist
     {
         public required string Url { get; set; }
         public required string Title { get; set; }
