@@ -22,7 +22,7 @@ namespace application.Config
             services.AddScoped<VerifyAnswersUseCase>();
             services.AddScoped<GetUnityUseCase>();
             services.AddScoped<GetQuestionnaireUseCase>();
-            services.AddScoped<ImportPlaylistUseCase>();
+            // services.AddScoped<ImportPlaylistUseCase>();
         }
     }
 }

@@ -11,7 +11,7 @@ namespace api.Controllers;
 [Route("api/unity")]
 [ApiController]
 [Authorize]
-public class UnityController(IUnityRepository unityRepository, GetUnityUseCase getUnityUseCase, ImportPlaylistUseCase importPlaylistUseCase) : ControllerBase
+public class UnityController(IUnityRepository unityRepository, GetUnityUseCase getUnityUseCase) : ControllerBase
 {
     [EndpointSummary("Obter lista")]
     [EndpointDescription("Retorna todas as unidades")]
@@ -40,10 +40,10 @@ public class UnityController(IUnityRepository unityRepository, GetUnityUseCase g
         return StatusCode((int)result.StatusCode, result.Content);
     }
 
-    [HttpPost("import/{playlistUrl}")]
-    public async Task<ActionResult> ImportFromYoutube(string playlistUrl)
-    {
-        var result = await importPlaylistUseCase.ExecuteAsync(playlistUrl);
-        return StatusCode((int)result.StatusCode, result.Content);
-    }
+    // [HttpPost("import/{playlistUrl}")]
+    // public async Task<ActionResult> ImportFromYoutube(string playlistUrl)
+    // {
+    //     var result = await importPlaylistUseCase.ExecuteAsync(playlistUrl);
+    //     return StatusCode((int)result.StatusCode, result.Content);
+    // }
 }
