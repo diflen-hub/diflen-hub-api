@@ -10,19 +10,31 @@ namespace application.UseCases
     {
         public async Task<UseCaseResult<string>> ExecuteAsync(string username, string password)
         {
-            var user = new User()
+            var userAlreadyExists = await userRepository.GetAsync(u => u.Username == username) != null;
+
+            if (userAlreadyExists)
+                return Conflict();
+            
+            await userRepository.InsertAsync(new User()
             {
                 Username = username,
-                Password = HashPassword(password)
-            };
+                Password = HashPassword(password),
+                Status = true,
+            });
 
-            await userRepository.InsertAsync(user);
-
-            return new()
-            {
-                StatusCode = HttpStatusCode.Created,
-                Content = "Usuário criado com sucesso"
-            };
+            return Created();
         }
+
+        private static UseCaseResult<string> Created() => new()
+        {
+            StatusCode = HttpStatusCode.Created,
+            Content = "Usuário criado com sucesso."
+        };
+
+        private static UseCaseResult<string> Conflict() => new()
+        {
+            StatusCode = HttpStatusCode.Conflict,
+            Content = "Usuário já existe."
+        };
     }
 }
