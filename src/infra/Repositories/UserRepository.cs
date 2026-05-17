@@ -11,8 +11,8 @@ namespace infra.Repositories
         {
             var user = await context.Users.FirstOrDefaultAsync(filter);
 
-            if (user is null) return null
-            if (user.Status == false) return null
+            if (user is null) return null;
+            if (user.Status == false) return null;
 
             return user;
         }
