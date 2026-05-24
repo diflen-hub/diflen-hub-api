@@ -9,7 +9,6 @@ namespace domain.Entities
         public Guid PublicId { get; set; }
         public string Username { get; set; } = string.Empty;
         public long Experience { get; set; }
-        public string ProfilePic { get; set; } = string.Empty;
         public int RequiredExperienceToNextLevel => CalculateRequiredNextLevel(Experience);
         public int Level => CalculateLevel(Experience);
         public float LevelPercentage => CalculateLevelPercentage(Experience);

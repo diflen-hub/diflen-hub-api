@@ -14,12 +14,6 @@ namespace domain.Models
 
         public bool Status { get; set; }
 
-        [Column("file_type")]
-        public string? FileType { get; set; }
-
-        [Column("profile_picture")]
-        public byte[]? ProfilePicture { get; set; }
-
         public Roles Role { get; set; }
     }
 }

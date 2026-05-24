@@ -51,7 +51,6 @@ namespace api.Controllers
                 PublicId = user.PublicId,
                 Experience = user.Experience,
                 Username = user.Username,
-                ProfilePic = $"data:{user.FileType};base64,{UTF8.GetString(user.ProfilePicture ?? [])}",
                 Role = user.Role
             });
         }
