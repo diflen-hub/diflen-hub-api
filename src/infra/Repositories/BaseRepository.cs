@@ -18,7 +18,7 @@ namespace infra.Repositories
             return entity;
         }
 
-        public async Task<T?> GetAsync(Expression<Func<T, bool>> filter)
+        public virtual async Task<T?> GetAsync(Expression<Func<T, bool>> filter)
         {
             return await _dbSet.FirstOrDefaultAsync(filter);
         }
