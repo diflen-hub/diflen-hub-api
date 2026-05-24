@@ -23,6 +23,7 @@ builder.Services.AddApplication();
 
 builder.Services.AddJwt(builder.Configuration);
 builder.Services.AddScalar();
+builder.Services.AddHealthChecks();
 
 var app = builder.Build();
 
@@ -47,6 +48,6 @@ app.UseMiddleware<ApiMiddleware>();
 app.UseScalar();
 app.UseJwt();
 
-app.MapGet("api/healthcheck", () => "OK!");
+app.MapHealthChecks("/api/health");
 
 await app.RunAsync();

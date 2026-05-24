@@ -18,8 +18,6 @@ create table users(
     password varchar(255) not null,
     experience int not null default 0,
     status boolean default true,
-    file_type varchar(30),
-    profile_picture blob,
     role int not null default 0
 );
 
@@ -96,6 +94,11 @@ insert into users(
     "33e5cabd-e14a-415a-b94d-421bead93a35",
     "prolud",
     "$2a$11$DUhfwmZQryBVO42zkE2sWOUFJpyPWhqQbMVDWcUORl7EOSPLv3SQW",
+    1
+), (
+    "3b391393-bb34-49bf-9037-da0f3e60ad17",
+    "erielfundador",
+    "$2a$11$jaTx5ZQR2YvUt9OJG22THOKXL5AwOX8PGNfo.81jsdVxhkJ727WoK",
     1
 );
 
