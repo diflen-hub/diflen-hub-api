@@ -1,4 +1,4 @@
-name: pull-request
+name: basic branch protection
 
 on:
   pull_request:
@@ -6,7 +6,8 @@ on:
       - master
 
 jobs:
-  build_n_test:
+  basic-branch-protection:
+    name: basic branch protection
     runs-on: ubuntu-latest
     steps:
       - name: clone repository
