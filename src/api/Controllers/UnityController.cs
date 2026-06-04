@@ -39,11 +39,4 @@ public class UnityController(IUnityRepository unityRepository, GetUnityUseCase g
         var result = await getUnityUseCase.ExecuteAsync(decodedUnityName, Guid.Parse(publicUserId));
         return StatusCode((int)result.StatusCode, result.Content);
     }
-
-    // [HttpPost("import/{playlistUrl}")]
-    // public async Task<ActionResult> ImportFromYoutube(string playlistUrl)
-    // {
-    //     var result = await importPlaylistUseCase.ExecuteAsync(playlistUrl);
-    //     return StatusCode((int)result.StatusCode, result.Content);
-    // }
 }
