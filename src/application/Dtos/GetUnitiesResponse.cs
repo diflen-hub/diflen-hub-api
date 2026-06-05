@@ -1,4 +1,4 @@
-namespace api.Controllers.Responses
+namespace application.Dtos
 {
     public class GetUnitiesResponse
     {
