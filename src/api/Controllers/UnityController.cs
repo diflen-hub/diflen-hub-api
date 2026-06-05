@@ -1,8 +1,6 @@
 using System.Security.Claims;
-using api.Controllers.Responses;
 using application.UseCases;
 using application.Dtos;
-using domain.Interfaces.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,7 +9,7 @@ namespace api.Controllers;
 [Route("api/unity")]
 [ApiController]
 [Authorize]
-public class UnityController(IUnityRepository unityRepository, GetUnityUseCase getUnityUseCase) : ControllerBase
+public class UnityController(GetUnitiesUseCase getUnitiesUseCase, GetUnityUseCase getUnityUseCase) : ControllerBase
 {
     [EndpointSummary("Obter lista")]
     [EndpointDescription("Retorna todas as unidades")]
@@ -19,12 +17,8 @@ public class UnityController(IUnityRepository unityRepository, GetUnityUseCase g
     [HttpGet]
     public async Task<List<GetUnitiesResponse>> GetAll()
     {
-        var unities = await unityRepository.GetListAsync(u => true);
-        return unities.Select(unity => new GetUnitiesResponse
-        {
-            Name = unity.Name,
-            Description = unity.Description,
-        }).ToList();
+        var result = await getUnitiesUseCase.ExecuteAsync();
+        return result.Content!;
     }
 
     [EndpointSummary("Obter único")]

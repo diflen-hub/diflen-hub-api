@@ -20,6 +20,7 @@ namespace application.Config
             services.AddScoped<LoginUseCase>();
             services.AddScoped<RegisterUseCase>();
             services.AddScoped<VerifyAnswersUseCase>();
+            services.AddScoped<GetUnitiesUseCase>();
             services.AddScoped<GetUnityUseCase>();
             services.AddScoped<GetQuestionnaireUseCase>();
             services.AddScoped<ImportPlaylistUseCase>();
