@@ -31,6 +31,7 @@ namespace infra.Config
 
         private static void AddServices(IServiceCollection services)
         {
+            services.AddHttpClient<IStorageClient, SupabaseStorageClient>();
             services.AddScoped<ILessonService, LessonService>();
             services.AddScoped<IAlternativeService, AlternativeService>();
             services.AddScoped<IAnswerService, AnswerService>();
