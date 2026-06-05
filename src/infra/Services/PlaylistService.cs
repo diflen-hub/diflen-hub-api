@@ -3,6 +3,7 @@ using domain.Interfaces.Services;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
+using static domain.Entities.YoutubePlaylist;
 
 namespace infra.Services
 {
@@ -18,9 +19,13 @@ namespace infra.Services
         {
             var options = new ChromeOptions();
             options.AddUserProfilePreference("intl.accept_languages", "pt-BR,pt");
+            options.AddUserProfilePreference("profile.managed_default_content_settings.images", 2);
             options.AddArgument("--headless=new");
             options.AddArgument("--no-sandbox");
             options.AddArgument("--disable-dev-shm-usage");
+            options.AddArgument("--disable-extensions");
+            options.AddArgument("--disable-gpu");
+            options.AddArgument("--log-level=3");
 
             _driver = new ChromeDriver(options);
             _wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(15));
@@ -32,34 +37,19 @@ namespace infra.Services
 
             ScrollToBottom(_driver);
 
-            var videoUrls = _driver
-                .FindElements(By.XPath("//ytd-playlist-video-renderer"))
-                .Select(el => el.FindElements(By.XPath(".//a[@id='video-title']")) is { Count: > 0 } links
-                    ? links[0].GetAttribute("href")
-                    : null)
-                .Where(url => !string.IsNullOrEmpty(url))
-                .Cast<string>()
+            var contents = _driver.FindElement(By.XPath("//*[@id='contents']"));
+            var videoTitles = contents.FindElements(By.XPath("//*[@id='video-title']"));
+
+            playlist.Videos = videoTitles
+                .Select(el =>
+                {
+                    return new Video()
+                    {
+                        Title = el.Text,
+                        Url = el.GetAttribute("href")!,
+                    };
+                })
                 .ToList();
-
-            playlist.Videos = videoUrls.Select(url =>
-            {
-                _driver.Navigate().GoToUrl(url);
-
-                var descAccordion = _wait.Until(d =>
-                {
-                    var els = d.FindElements(By.XPath("//*[@id='description-inner']"));
-                    return els.Count > 0 && els[0].Displayed ? els[0] : null;
-                });
-                descAccordion!.Click();
-
-                var descEls = _driver.FindElements(By.XPath("//*[@id='expanded']/yt-attributed-string/span/span[1]"));
-                return new YoutubePlaylist.Video
-                {
-                    Url = url,
-                    Title = GetVideoTitle(),
-                    Description = descEls.Count > 0 ? descEls[0].Text : null
-                };
-            }).ToList();
 
             _driver.Close();
             _driver.Dispose();
@@ -79,12 +69,6 @@ namespace infra.Services
             return messageEls.Text;
         }
 
-        private string GetVideoTitle()
-        {
-            var el = _driver.FindElement(By.XPath("//*[@id='title']/h1/yt-formatted-string"));
-            return el.GetAttribute("title")!;
-        }
-
         private static void ScrollToBottom(IWebDriver driver)
         {
             var js = (IJavaScriptExecutor)driver;
@@ -93,7 +77,7 @@ namespace infra.Services
             while (true)
             {
                 js.ExecuteScript("window.scrollTo(0, document.documentElement.scrollHeight)");
-                Thread.Sleep(1500);
+                Thread.Sleep(500);
 
                 long newHeight = Convert.ToInt64(js.ExecuteScript("return document.documentElement.scrollHeight"));
                 if (newHeight == lastHeight) break;
