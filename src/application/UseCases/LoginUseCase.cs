@@ -12,16 +12,11 @@ namespace application.UseCases
         {
             var userFromDatabase = await userRepository.GetAsync(u => u.Username == username);
 
-            var passwordIsIncorrect = !Verify(password, userFromDatabase?.Password);
+            if (userFromDatabase is null) return LoginInvalido();
 
-            if (userFromDatabase is null || passwordIsIncorrect) return new()
-            {
-                Content = new()
-                {
-                    Message = "E-mail ou senha incorretos",
-                },
-                StatusCode = HttpStatusCode.Unauthorized
-            };
+            var passwordIsIncorrect = !Verify(password, userFromDatabase.Password);
+
+            if (passwordIsIncorrect) return LoginInvalido();
 
             return new()
             {
@@ -35,5 +30,14 @@ namespace application.UseCases
                 },
             };
         }
+
+        private static UseCaseResult<LoginResponseDto> LoginInvalido() => new()
+        {
+            Content = new()
+            {
+                Message = "E-mail ou senha incorretos",
+            },
+            StatusCode = HttpStatusCode.Unauthorized
+        };
     }
 }
