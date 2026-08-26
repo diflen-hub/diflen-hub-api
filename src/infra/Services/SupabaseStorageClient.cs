@@ -9,10 +9,16 @@ namespace infra.Services
         {
             var bucketUrl = configuration["Supabase:BucketUrl"]!;
             var url = $"{bucketUrl}{bucketName}/{fileName}";
-            var response = await httpClient.SendAsync(new HttpRequestMessage(HttpMethod.Head, url));
+            
+            HttpResponseMessage? response;
+            try
+            {
+                response = await httpClient.SendAsync(new HttpRequestMessage(HttpMethod.Head, url));
+            }
+            catch { return null; }
 
             if (!response.IsSuccessStatusCode) return null;
-            
+
             return url;
         }
     }
