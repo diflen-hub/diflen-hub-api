@@ -24,7 +24,9 @@ namespace api.Controllers
 
             return StatusCode((int)result.StatusCode, result.Content?.Select(l => new GetLessonsResponse
             {
+                PublicId = l.PublicId,
                 Title = l.Title,
+                Sequence = l.Sequence,
                 Concluded = l.Concluded
             }));
         }

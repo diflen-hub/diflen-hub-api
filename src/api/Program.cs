@@ -1,8 +1,10 @@
+using System.Text.Json.Serialization;
 using api.Extensions;
 using infra.Config;
 using application.Config;
 using api.Middlewares;
 using Microsoft.AspNetCore.HttpOverrides;
+using FluentValidation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,9 +30,16 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddInfrastructure();
 builder.Services.AddApplication();
+builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 
 builder.Services.AddJwt(builder.Configuration);
 builder.Services.AddScalar();
+
+builder.Services.Configure<Microsoft.AspNetCore.Mvc.JsonOptions>(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+});
+
 builder.Services.AddHealthChecks();
 
 var app = builder.Build();

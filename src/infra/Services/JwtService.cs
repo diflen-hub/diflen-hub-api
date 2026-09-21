@@ -20,6 +20,7 @@ namespace infra.Services
                 [
                     new Claim(JwtRegisteredClaimNames.Nickname, user.Username),
                     new Claim(JwtRegisteredClaimNames.NameId, user.PublicId.ToString()),
+                    new Claim(ClaimTypes.Role, user.Role.ToString()),
                 ]),
                 Expires = GetExpirationDate(),
                 Issuer = _configuration["JwtConfig:Issuer"],

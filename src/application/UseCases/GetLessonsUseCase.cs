@@ -23,6 +23,7 @@ namespace application.UseCases
                     Title = lesson.Title,
                     Description = lesson.Description,
                     VideoUrl = lesson.VideoUrl,
+                    Sequence = lesson.Sequence,
                     Concluded = await lessonService.LessonAreAlreadyAnswered(publicUserId, lesson.PublicId),
                 });
             }
