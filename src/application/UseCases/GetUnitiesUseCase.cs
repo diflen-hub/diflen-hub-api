@@ -17,6 +17,7 @@ namespace application.UseCases
                 var imageExists = !string.IsNullOrEmpty(imageUrl);
                 return new GetUnitiesResponse
                 {
+                    PublicId = unity.PublicId,
                     Name = unity.Name,
                     Description = unity.Description,
                     UnityCover = imageExists ? imageUrl : null

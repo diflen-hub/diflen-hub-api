@@ -24,6 +24,15 @@ namespace application.Config
             services.AddScoped<GetUnityUseCase>();
             services.AddScoped<GetQuestionnaireUseCase>();
             services.AddScoped<ImportPlaylistUseCase>();
+            services.AddScoped<CreateUnityUseCase>();
+            services.AddScoped<DeleteUnityUseCase>();
+            services.AddScoped<CreateLessonUseCase>();
+            services.AddScoped<DeleteLessonUseCase>();
+            services.AddScoped<CreateQuestionUseCase>();
+            services.AddScoped<DeleteQuestionUseCase>();
+            services.AddScoped<CreateAlternativeUseCase>();
+            services.AddScoped<UpdateAlternativeUseCase>();
+            services.AddScoped<DeleteAlternativeUseCase>();
         }
     }
 }

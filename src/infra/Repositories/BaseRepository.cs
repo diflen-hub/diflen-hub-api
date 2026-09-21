@@ -40,5 +40,23 @@ namespace infra.Repositories
             await _dbSet.AddRangeAsync(entities);
             await _context.SaveChangesAsync();
         }
+
+        public async Task UpdateAsync(T entity)
+        {
+            _dbSet.Update(entity);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(T entity)
+        {
+            _dbSet.Remove(entity);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteRangeAsync(List<T> entities)
+        {
+            _dbSet.RemoveRange(entities);
+            await _context.SaveChangesAsync();
+        }
     }
 }

@@ -9,5 +9,8 @@ namespace domain.Interfaces.Repositories
         public Task<List<T>> GetListAsync(Expression<Func<T, bool>> filter);
         public Task<T> InsertAsync(T entity);
         public Task InsertRangeAsync(List<T> entities);
+        public Task UpdateAsync(T entity);
+        public Task DeleteAsync(T entity);
+        public Task DeleteRangeAsync(List<T> entities);
     }
 }
